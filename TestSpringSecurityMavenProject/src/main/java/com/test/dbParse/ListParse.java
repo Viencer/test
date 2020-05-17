@@ -35,7 +35,7 @@ public class ListParse {
                 personals.add(personal);
             }
         } catch (SQLException e) {
-            logger.error("SQL error in getAllPersonal() method. ListParse.class");
+            logger.error("error in getAllPersonal() method. ListParse.class");
         }
         return personals;
     }

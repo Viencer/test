@@ -10,13 +10,13 @@ public interface UserService {
 
     List<Personal> allPersonal();
 
-    void create(String firstName, String lastName, int bossId, int exp, int salary, int jobId, String username, String password);
+    void createPersonal(String firstName, String lastName, int bossId, int exp, int salary, int jobId, String username, String password);
 
-    void update(int id, String lastName, int bossId, int exp, int salary, int jobId);
+    void updatePersonal(int id, String lastName, int bossId, int exp, int salary, int jobId);
 
-    void delete(int id);
+    void deletePersonal(int id);
 
-    Personal getById(int id);
+    Personal getByIdPersonal(int id);
 
-    Personal getByName(String name);
+    Personal getByUserNamePersonal(String name);
 }

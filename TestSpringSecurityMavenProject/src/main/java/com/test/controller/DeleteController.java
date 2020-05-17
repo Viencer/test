@@ -25,7 +25,7 @@ public class DeleteController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/delete/{personalId}")
     public ModelAndView delete(ModelAndView model, @PathVariable("personalId") int personalId) {
-        userService.delete(personalId);
+        userService.deletePersonal(personalId);
         model.setViewName("delete");
         logger.debug("call delete controller with delete id: " + personalId);
         return model;

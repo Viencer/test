@@ -26,18 +26,18 @@ public class UpdateController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{personalId}")
     public ModelAndView findById(ModelAndView model, @PathVariable("personalId") int personalId) {
-        model.addObject("Personal", userService.getById(personalId));
+        model.addObject("Personal", userService.getByIdPersonal(personalId));
         model.setViewName("update");
         logger.debug("called update controller with id to update: " + personalId);
         return model;
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(ModelAndView model, @RequestParam("id") int id, @RequestParam("lastName") String lastName,
                                @RequestParam("bossId") int bossId, @RequestParam("exp") int exp,
                                @RequestParam("salary") int salary, @RequestParam("jobId") int jobId) {
-        userService.update(id, lastName, bossId, exp, salary, jobId);
+        userService.updatePersonal(id, lastName, bossId, exp, salary, jobId);
         model.addObject("msg", "personal updated");
         model.setViewName("update");
         logger.debug("called update controller with param");

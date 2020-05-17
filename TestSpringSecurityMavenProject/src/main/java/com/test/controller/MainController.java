@@ -31,7 +31,7 @@ public class MainController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView user(Principal principal, ModelAndView model){
-        model.addObject("person", userService.getByName(principal.getName()));
+        model.addObject("person", userService.getByUserNamePersonal(principal.getName()));
         model.setViewName("user");
         logger.debug("call user page page");
         return model;

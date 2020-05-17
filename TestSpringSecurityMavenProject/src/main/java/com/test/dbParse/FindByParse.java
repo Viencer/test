@@ -31,7 +31,7 @@ public class FindByParse {
                 personal = new Personal(id, first_name, last_name, jobId, boss_id, salary, experience);
             }
         } catch (SQLException e) {
-            logger.error("SQL error in getPersonalBy() method. FindByParse.class");
+            logger.error("error in getPersonalBy() method. FindByParse.class");
         }
         return personal;
     }
