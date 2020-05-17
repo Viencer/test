@@ -1,12 +1,15 @@
 package com.test.dbParse;
 
 import com.test.model.Personal;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FindByParse {
+
+    private static Logger logger = Logger.getLogger(FindByParse.class);
 
     private static Personal personal;
 
@@ -28,8 +31,7 @@ public class FindByParse {
                 personal = new Personal(id, first_name, last_name, jobId, boss_id, salary, experience);
             }
         } catch (SQLException e) {
-            System.out.println("SQL EXEPTION");
-            e.printStackTrace();
+            logger.error("SQL error in getPersonalBy() method. FindByParse.class");
         }
         return personal;
     }

@@ -1,6 +1,7 @@
 package com.test.dbParse;
 
 import com.test.model.Personal;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class ListParse {
 
+    private static Logger logger = Logger.getLogger(ListParse.class);
 
     private static Personal personal;
 
@@ -33,8 +35,7 @@ public class ListParse {
                 personals.add(personal);
             }
         } catch (SQLException e) {
-            System.out.println("SQL EXEPTION");
-            e.printStackTrace();
+            logger.error("SQL error in getAllPersonal() method. ListParse.class");
         }
         return personals;
     }

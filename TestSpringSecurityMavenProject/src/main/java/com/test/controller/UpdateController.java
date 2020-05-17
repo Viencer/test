@@ -1,6 +1,7 @@
 package com.test.controller;
 
 import com.test.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -10,19 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.SQLException;
-
 @Controller
 public class UpdateController {
 
-    @Autowired
+    private static Logger logger = Logger.getLogger(UpdateController.class);
+
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{personalId}")
-    public ModelAndView findById(ModelAndView model, @PathVariable("personalId") int personalId) throws SQLException {
+    public ModelAndView findById(ModelAndView model, @PathVariable("personalId") int personalId) {
         model.addObject("Personal", userService.getById(personalId));
         model.setViewName("update");
+        logger.debug("called update controller with id to update: " + personalId);
         return model;
     }
 
@@ -30,10 +36,11 @@ public class UpdateController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(ModelAndView model, @RequestParam("id") int id, @RequestParam("lastName") String lastName,
                                @RequestParam("bossId") int bossId, @RequestParam("exp") int exp,
-                               @RequestParam("salary") int salary, @RequestParam("jobId") int jobId) throws SQLException {
+                               @RequestParam("salary") int salary, @RequestParam("jobId") int jobId) {
         userService.update(id, lastName, bossId, exp, salary, jobId);
         model.addObject("msg", "personal updated");
         model.setViewName("update");
+        logger.debug("called update controller with param");
         return model;
     }
 
