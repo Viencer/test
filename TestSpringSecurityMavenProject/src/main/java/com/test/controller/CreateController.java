@@ -33,7 +33,7 @@ public class CreateController {
 
     //CREATE PERSONAL
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/create")
+    @RequestMapping(value = "/createNewPersonal")
     public ModelAndView add(ModelAndView model) {
         model.setViewName("create");
         model.addObject("task", 1);
@@ -41,14 +41,14 @@ public class CreateController {
         return model;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/createP", method = RequestMethod.POST)
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping(value = "/createPersonal", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView model, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-                               @RequestParam("bossId") int bossId, @RequestParam("com") int com,
+                               @RequestParam("bossId") int bossId, @RequestParam("com") int premium,
                                @RequestParam("salary") int salary, @RequestParam("jobId") int jobId,
                                @RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
-        userServicePersonal.createPersonal(firstName, lastName, bossId, com, salary, jobId, department, patient, username, password);
+        userServicePersonal.createPersonal(firstName, lastName, bossId, premium, salary, jobId, department, patient, username, password);
         model.addObject("msg", "personal added");
         model.setViewName("create");
         logger.debug("call create controller with param");

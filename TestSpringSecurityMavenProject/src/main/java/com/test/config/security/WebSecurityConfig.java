@@ -1,6 +1,5 @@
 package com.test.config.security;
 
-import com.test.dao.DaoConnectionImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;

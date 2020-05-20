@@ -1,7 +1,6 @@
 package com.test.dbParse.patient;
 
 import com.test.model.Patient;
-import com.test.model.Personal;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 

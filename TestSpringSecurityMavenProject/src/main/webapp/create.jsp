@@ -6,14 +6,6 @@
 </head>
 <body>
 
-<sec:authorize access="hasRole('ADMIN')">
-    <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
-    <c:if test="${msg != null}">
-        <h1>${msg}</h1>
-        <c:redirect url="/admin"/>
-    </c:if>
-</sec:authorize>
-
 <sec:authorize access="hasRole('DOCTOR')">
     <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
     <c:if test="${msg != null}">
@@ -22,17 +14,24 @@
     </c:if>
 </sec:authorize>
 
-<c:if test="${task == 1}">
-    <form action="createP" method="post">
+<sec:authorize access="hasRole('ADMIN')">
+    <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <c:if test="${msg != null}">
+        <h1>${msg}</h1>
+        <c:redirect url="/admin"/>
+    </c:if>
+    <c:if test="${task == 1}">
+        <form action="${pageContext.request.contextPath}/createPersonal" method="post">
 
 <pre>
     FIRST_NAME: <input type="text" name="firstName" required placeholder="firstName"/>
 
     LAST_NAME: <input type="text" name="lastName" required placeholder="lastName"/>
 
-    BOSS_ID: <input type="number" name="bossId"/>
+    BOSS_ID: <input type="number" name="bossId" value="0"/>
 
-    COMMISSION: <input type="number" name="com"/>
+    PREMIUM: <input type="number" name="com" value="0"/>
 
     SALARY: <input type="number" name="salary" required placeholder="salary"/>
 
@@ -48,9 +47,11 @@
 
     <input type="submit" value="create"/>
 </pre>
-        <sec:csrfInput/>
-    </form>
-</c:if>
+            <sec:csrfInput/>
+        </form>
+    </c:if>
+</sec:authorize>
+
 <c:if test="${task == 2}">
     <c:if test="${msg != null}">
         <h1>${msg}</h1>

@@ -18,7 +18,7 @@
             <th>JOB_ID</th>
             <th>BOSS_ID</th>
             <th>SALARY</th>
-            <th>COMMISSION</th>
+            <th>PREMIUM</th>
             <th>DEPARTMENT_ID</th>
             <th>PATIENT_ID</th>
             <th>Edit</th>
@@ -32,7 +32,7 @@
                 <td>${patient.jobId}</td>
                 <td>${patient.bossID}</td>
                 <td>${patient.salary}</td>
-                <td>${patient.com}</td>
+                <td>${patient.premium}</td>
                 <td>${patient.department_id}</td>
                 <td>${patient.patient_id}</td>
                 <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
@@ -41,7 +41,7 @@
         </c:forEach>
     </table>
     <br>
-    <a href="${pageContext.request.contextPath}/create">Create</a>
+    <a href="${pageContext.request.contextPath}/createNewPersonal">Create</a>
     <a href="${pageContext.request.contextPath}/findP">Find by...</a>
     <br>
     <br>

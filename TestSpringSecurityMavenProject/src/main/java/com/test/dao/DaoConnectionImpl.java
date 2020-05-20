@@ -6,15 +6,21 @@ import com.test.dbParse.personal.FindByParse;
 import com.test.dbParse.personal.ListOfPersonalParse;
 import com.test.model.Patient;
 import com.test.model.Personal;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
+import javax.annotation.PostConstruct;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +32,6 @@ import java.util.List;
 
 @Component("dao")
 @Scope(value = "singleton")
-@PropertySource("classpath:resources.properties")
 public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
 
     private static Logger logger = Logger.getLogger(DaoConnectionImpl.class);
@@ -49,10 +54,6 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         return new DaoConnectionImpl();
     }
 
-    public DataSource getDataSource() {
-        connect();
-        return dataSource;
-    }
 
     //CONNECT
     @Override
@@ -87,9 +88,28 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         }
     }
 
+    @PostConstruct
     public void dataCreate() {
-
-
+        connect();
+        try {
+            // File drop = ResourceUtils.getFile("classpath:drop.sql");
+            File create = ResourceUtils.getFile("classpath:db.sql");
+            File insert = ResourceUtils.getFile("classpath:insert.sql");
+            ScriptRunner scriptRunner = new ScriptRunner(connection);
+            scriptRunner.setStopOnError(false);
+            //scriptRunner.runScript(new BufferedReader(new FileReader(drop)));
+            scriptRunner.runScript(new BufferedReader(new FileReader(create)));
+            scriptRunner.runScript(new BufferedReader(new FileReader(insert)));
+        } catch (NullPointerException | IOException e) {
+            logger.error("Error in create database ");
+        } finally {
+            try {
+                connection.close();
+                context.close();
+            } catch (NamingException | SQLException e) {
+                logger.error("Error in create database ");
+            }
+        }
     }
 
     @Override
@@ -129,7 +149,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         try {
             connect();
             statement = connection.prepareStatement("UPDATE LAB3MU_PERSONAL" +
-                    " SET LAST_NAME = ?, BOSS_ID = ?, COMMISSIONS = ?, SALARY = ?, JOB_ID = ?, DEPARTMENT_ID = ?, " +
+                    " SET LAST_NAME = ?, BOSS_ID = ?, PREMIUM = ?, SALARY = ?, JOB_ID = ?, DEPARTMENT_ID = ?, " +
                     "PATIENT_ID = ? WHERE PERSONAL_ID = ?");
             statement.setString(1, lastName);
             statement.setInt(2, bossId);
@@ -197,18 +217,26 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     }
 
     @Override
-    public void createPersonal(String firstName, String lastName, int bossId, int exp, int salary, int jobId,
+    public void createPersonal(String firstName, String lastName, int bossId, int premium, int salary, int jobId,
                                int department_id, Integer patient_id) {
         try {
             connect();
             statement = connection.prepareStatement("INSERT INTO LAB3MU_PERSONAL " +
-                    "(personal_id, first_name, last_name, boss_id, job_id, commissions, salary, department_id, patient_id)  " +
+                    "(personal_id, first_name, last_name, boss_id, job_id, premium, salary, department_id, patient_id)  " +
                     "VALUES (LAB3MU_PERSONAL_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, firstName);
             statement.setString(2, lastName);
-            statement.setInt(3, bossId);
+            if (bossId == 0) {
+                statement.setNull(3, java.sql.Types.INTEGER);
+            } else {
+                statement.setInt(3, bossId);
+            }
             statement.setInt(4, jobId);
-            statement.setInt(5, exp);
+            if (premium == 0) {
+                statement.setNull(5, java.sql.Types.INTEGER);
+            } else {
+                statement.setInt(5, premium);
+            }
             statement.setInt(6, salary);
             statement.setInt(7, department_id);
             if (patient_id == 0) {

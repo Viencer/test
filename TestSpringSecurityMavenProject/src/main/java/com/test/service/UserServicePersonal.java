@@ -10,7 +10,7 @@ public interface UserServicePersonal {
 
     List<Personal> allPersonal();
 
-    void createPersonal(String firstName, String lastName, int bossId, int com, int salary,
+    void createPersonal(String firstName, String lastName, int bossId, int premium, int salary,
                         int jobId, int department_id, Integer patient_id, String username, String password);
 
     void updatePersonal(int id, String lastName, int bossId, int com, int salary, int jobId, int department_id, Integer patient_id);
@@ -25,5 +25,4 @@ public interface UserServicePersonal {
 
     List<Personal> findByLastName(String lastName);
 
-    void dataCreate();
 }

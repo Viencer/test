@@ -9,7 +9,7 @@ public class Personal {
     private int jobId;
     private int bossID;
     private int salary;
-    private int com;
+    private int premium;
     private int department_id;
     private Integer patient_id;
 
@@ -17,14 +17,14 @@ public class Personal {
     }
 
     public Personal(int id, String firstName, String lastName, int jobId, int bossID,
-                    int salary, int com, int department_id, int patient_id) {
+                    int salary, int premium, int department_id, int patient_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobId = jobId;
         this.bossID = bossID;
         this.salary = salary;
-        this.com = com;
+        this.premium = premium;
         this.department_id = department_id;
         this.patient_id = patient_id;
     }
@@ -45,12 +45,12 @@ public class Personal {
         this.patient_id = patient_id;
     }
 
-    public int getCom() {
-        return com;
+    public int getPremium() {
+        return premium;
     }
 
-    public void setCom(int com) {
-        this.com = com;
+    public void setPremium(int premium) {
+        this.premium = premium;
     }
 
     public int getSalary() {
@@ -110,7 +110,7 @@ public class Personal {
                 getJobId() == personal.getJobId() &&
                 getBossID() == personal.getBossID() &&
                 getSalary() == personal.getSalary() &&
-                getCom() == personal.getCom() &&
+                getPremium() == personal.getPremium() &&
                 getDepartment_id() == personal.getDepartment_id() &&
                 getPatient_id() == personal.getPatient_id() &&
                 Objects.equals(getFirstName(), personal.getFirstName()) &&
@@ -119,7 +119,7 @@ public class Personal {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getJobId(), getBossID(), getSalary(), getCom(), getDepartment_id(), getPatient_id());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getJobId(), getBossID(), getSalary(), getPremium(), getDepartment_id(), getPatient_id());
     }
 
     @Override
@@ -131,7 +131,7 @@ public class Personal {
                 ", jobId=" + jobId +
                 ", bossID=" + bossID +
                 ", salary=" + salary +
-                ", com=" + com +
+                ", premium=" + premium +
                 ", department_id=" + department_id +
                 ", patient_id=" + patient_id +
                 '}';

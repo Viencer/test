@@ -28,7 +28,7 @@
 
     BOSS_ID <input type="number" name="bossId" value="${patient.bossID}"/>
 
-    COMMISSION <input type="number" name="com" value="${patient.com}"/>
+    PREMIUM <input type="number" name="com" value="${patient.premium}"/>
 
     SALARY <input type="number" name="salary" value="${patient.salary}"/>
 
