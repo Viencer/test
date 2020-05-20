@@ -1,11 +1,9 @@
 package com.test.dao;
 
-
 import com.test.dbParse.FindByParse;
 import com.test.dbParse.ListParse;
 import com.test.model.Personal;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,12 +29,6 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     private static Logger logger = Logger.getLogger(DaoConnectionImpl.class);
 
     private DataSource dataSource;
-
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     private static DaoConnectionImpl oracleDaoConnection;
     private Personal personal;
     private Context context;
@@ -52,6 +44,10 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         return new DaoConnectionImpl();
     }
 
+    public DataSource getDataSource() {
+        connect();
+        return dataSource;
+    }
 
     //CONNECT
     @Override
@@ -86,37 +82,51 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         }
     }
 
+    public void dataCreate() {
+
+
+    }
+
     @Override
     public List<Personal> selectAllPersonal() {
         try {
             connect();
-            statement = connection.prepareStatement("SELECT * FROM LAB3_PERSONAL");
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL");
             resultSet = statement.executeQuery();
             personals = ListParse.getAllPersonal(resultSet);
-            disconnect();
             return personals;
         } catch (SQLException e) {
             logger.error("error in selectAllPersonal() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
         return personals;
     }
 
     @Override
-    public void update(int id, String lastName, int bossId, int exp, int salary, int jobId) {
+    public void update(int id, String lastName, int bossId, int com, int salary, int jobId, int department_id, Integer patient_id) {
         try {
             connect();
-            statement = connection.prepareStatement("UPDATE LAB3_PERSONAL" +
-                    " SET LAST_NAME = ?, BOSS_ID = ?, EXPERIENCE =?, SALARY = ?, JOB_ID = ? WHERE PERSONAL_ID = ?");
+            statement = connection.prepareStatement("UPDATE LAB3MU_PERSONAL" +
+                    " SET LAST_NAME = ?, BOSS_ID = ?, COMMISSIONS = ?, SALARY = ?, JOB_ID = ?, DEPARTMENT_ID = ?, " +
+                    "PATIENT_ID = ? WHERE PERSONAL_ID = ?");
             statement.setString(1, lastName);
             statement.setInt(2, bossId);
-            statement.setInt(3, exp);
+            statement.setInt(3, com);
             statement.setInt(4, salary);
             statement.setInt(5, jobId);
-            statement.setInt(6, id);
+            statement.setInt(6, department_id);
+            if (patient_id == 0) {
+                statement.setNull(7, java.sql.Types.INTEGER);
+            } else {
+                statement.setInt(7, patient_id);
+            }
+            statement.setInt(8, id);
             resultSet = statement.executeQuery();
-            disconnect();
         } catch (SQLException e) {
             logger.error("error in update() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
     }
 
@@ -124,38 +134,47 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     public void delete(int id) {
         try {
             connect();
-            statement = connection.prepareStatement("DELETE LAB3_PERSONAL WHERE PERSONAL_ID = ?");
+            statement = connection.prepareStatement("DELETE LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            disconnect();
         } catch (SQLException e) {
             logger.error("error in delete() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
     }
 
     @Override
-    public void create(String firstName, String lastName, int bossId, int exp, int salary, int jobId, String username, String password) {
+    public void create(String firstName, String lastName, int bossId, int exp, int salary, int jobId, String username,
+                       String password, int department_id, Integer patient_id) {
         try {
             connect();
-            statement = connection.prepareStatement("INSERT INTO lab3_personal " +
-                    "(personal_id, first_name, last_name, boss_id, job_id, experience, salary)  " +
-                    "VALUES (LAB3_PERSONAL_SEQ.nextval, ?, ?, ?, ?, ?, ?)");
+            statement = connection.prepareStatement("INSERT INTO LAB3MU_PERSONAL " +
+                    "(personal_id, first_name, last_name, boss_id, job_id, commissions, salary, department_id, patient_id)  " +
+                    "VALUES (LAB3_PERSONAL_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setInt(3, bossId);
             statement.setInt(4, jobId);
             statement.setInt(5, exp);
             statement.setInt(6, salary);
+            statement.setInt(7, department_id);
+            if (patient_id == 0) {
+                statement.setNull(8, java.sql.Types.INTEGER);
+            } else {
+                statement.setInt(8, patient_id);
+            }
             resultSet = statement.executeQuery();
-            statement = connection.prepareStatement("INSERT INTO lab3_Roles " +
+            statement = connection.prepareStatement("INSERT INTO LAB3MU_USER_DATA " +
                     "(personal_id, user_name, password, role, enabled) " +
-                    "VALUES (LAB3_ROLE_SEQ.nextval, ?, ?, 'ROLE_USER', 1)");
+                    "VALUES (LAB3MU_USER_DATA_SEQ.nextval, ?, ?, 'ROLE_USER', 1)");
             statement.setString(1, username);
             statement.setString(2, password);
             resultSet = statement.executeQuery();
-            disconnect();
         } catch (SQLException e) {
             logger.error("error in create() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
     }
 
@@ -163,14 +182,15 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     public Personal findById(int id) {
         try {
             connect();
-            statement = connection.prepareStatement("SELECT * FROM LAB3_PERSONAL WHERE PERSONAL_ID = ?");
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
             personal = FindByParse.getPersonalBy(resultSet);
-            disconnect();
             return personal;
         } catch (SQLException e) {
             logger.error("error in findById() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
         return personal;
     }
@@ -179,14 +199,15 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     public Personal getByName(String name) {
         try {
             connect();
-            statement = connection.prepareStatement("SELECT * FROM LAB3_PERSONAL P, LAB3_ROLES R WHERE P.PERSONAL_ID = R.PERSONAL_ID AND USER_NAME = ?");
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL P, LAB3MU_USER_DATA R WHERE P.PERSONAL_ID = R.PERSONAL_ID AND USER_NAME = ?");
             statement.setString(1, name);
             resultSet = statement.executeQuery();
             personal = FindByParse.getPersonalBy(resultSet);
-            disconnect();
             return personal;
         } catch (SQLException e) {
             logger.error("error in getByName() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
         }
         return personal;
     }

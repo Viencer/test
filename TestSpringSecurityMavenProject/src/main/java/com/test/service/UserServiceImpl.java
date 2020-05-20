@@ -17,15 +17,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createPersonal(String firstName, String lastName, int bossId, int exp, int salary, int jobId, String username, String password) {
+    public void createPersonal(String firstName, String lastName, int bossId, int com, int salary, int jobId, String username,
+                               String password, int department_id, Integer patient_id) {
         logger.debug("called create() method. UserServiceImpl.class");
-        DaoConnectionImpl.getInstance().create(firstName, lastName, bossId, exp, salary, jobId, username, password);
+        DaoConnectionImpl.getInstance().create(firstName, lastName, bossId, com, salary, jobId, username, password,
+                department_id, patient_id);
     }
 
     @Override
-    public void updatePersonal(int id, String lastName, int bossId, int exp, int salary, int jobId) {
+    public void updatePersonal(int id, String lastName, int bossId, int com, int salary, int jobId, int department_id, Integer patient_id) {
         logger.debug("called update() method. UserServiceImpl.class");
-        DaoConnectionImpl.getInstance().update(id, lastName, bossId, exp, salary, jobId);
+        DaoConnectionImpl.getInstance().update(id, lastName, bossId, com, salary, jobId, department_id, patient_id);
     }
 
     @Override
@@ -44,5 +46,10 @@ public class UserServiceImpl implements UserService {
     public Personal getByUserNamePersonal(String name) {
         logger.debug("called getByName() method. UserServiceImpl.class");
         return DaoConnectionImpl.getInstance().getByName(name);
+    }
+
+    @Override
+    public void dataCreate() {
+        DaoConnectionImpl.getInstance().dataCreate();
     }
 }

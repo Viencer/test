@@ -1,5 +1,6 @@
 package com.test.config.security;
 
+import com.test.dao.DaoConnectionImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,7 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -20,8 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static Logger logger = Logger.getLogger(WebSecurityConfig.class);
 
-    @Autowired
-    DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) {
@@ -43,12 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationMgr) {
         try {
-            authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance())
+            authenticationMgr.jdbcAuthentication().dataSource(DaoConnectionImpl.getInstance().getDataSource())
                     .usersByUsernameQuery(
-                            "select USER_NAME, PASSWORD, ENABLED from LAB3_ROLES where USER_NAME = ?")
+                            "select USER_NAME, PASSWORD, ENABLE from LAB3MU_USER_DATA where USER_NAME = ?")
                     .authoritiesByUsernameQuery(
-                            "select USER_NAME, ROLE from LAB3_ROLES where USER_NAME = ?");
-        } catch (Exception e) {
+                            "select USER_NAME, ROLE from LAB3MU_USER_DATA where USER_NAME = ?");
+
+        } catch (Exception e){
             logger.error("error in configure. WebSecurityConfig.class " + e.getMessage());
         }
     }

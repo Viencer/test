@@ -32,10 +32,11 @@ public class CreateController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/createP", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView model, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-                               @RequestParam("bossId") int bossId, @RequestParam("exp") int exp,
+                               @RequestParam("bossId") int bossId, @RequestParam("com") int com,
                                @RequestParam("salary") int salary, @RequestParam("jobId") int jobId,
-                               @RequestParam("username") String username, @RequestParam("password") String password) {
-        userService.createPersonal(firstName, lastName, bossId, exp, salary, jobId, username, password);
+                               @RequestParam("username") String username, @RequestParam("password") String password,
+                               @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
+        userService.createPersonal(firstName, lastName, bossId, com, salary, jobId, username, password, department, patient);
         model.addObject("msg", "personal added");
         model.setViewName("create");
         logger.debug("call create controller with param");

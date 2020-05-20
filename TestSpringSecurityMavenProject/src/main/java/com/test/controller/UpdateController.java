@@ -33,12 +33,14 @@ public class UpdateController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateP", method = RequestMethod.POST)
     public ModelAndView update(ModelAndView model, @RequestParam("id") int id, @RequestParam("lastName") String lastName,
-                               @RequestParam("bossId") int bossId, @RequestParam("exp") int exp,
-                               @RequestParam("salary") int salary, @RequestParam("jobId") int jobId) {
-        userService.updatePersonal(id, lastName, bossId, exp, salary, jobId);
+                               @RequestParam("bossId") int bossId, @RequestParam("com") int com,
+                               @RequestParam("salary") int salary, @RequestParam("jobId") int jobId,
+                               @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
+        userService.updatePersonal(id, lastName, bossId, com, salary, jobId, department, patient);
         model.addObject("msg", "personal updated");
+        System.out.println("ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
         model.setViewName("update");
         logger.debug("called update controller with param");
         return model;

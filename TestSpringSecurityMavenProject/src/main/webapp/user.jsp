@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href="logout">logout</a> <br><br>
-<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+<security:authorize access="hasRole('DOCTOR') or hasRole('ADMIN')">
     <table class="tg" border='1' cellpadding='2' width='100%'>
         <tr>
             <th>ID</th>
@@ -17,7 +17,9 @@
             <th>JOB_ID</th>
             <th>BOSS_ID</th>
             <th>SALARY</th>
-            <th>EXPERIENCE</th>
+            <th>COMMISSION</th>
+            <th>DEPARTMENT_ID</th>
+            <th>PATIENT_ID</th>
         </tr>
         <c:set var="personal" value="${person}"/>
         <tr>
@@ -27,7 +29,9 @@
             <td>${personal.jobId}</td>
             <td>${personal.bossID}</td>
             <td>${personal.salary}</td>
-            <td>${personal.exp}</td>
+            <td>${personal.com}</td>
+            <td>${personal.department_id}</td>
+            <td>${personal.patient_id}</td>
         </tr>
     </table>
 </security:authorize>

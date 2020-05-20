@@ -5,9 +5,10 @@
     <title>Update</title>
 </head>
 <body>
-<p><strong><a href="admin">BACK</a></strong></p>
+<p><strong><a href="${pageContext.request.contextPath}/admin">BACK</a></strong></p>
 <c:if test="${msg != null}">
     <h1>${msg}</h1>
+    <c:redirect url="/admin"/>
 </c:if>
 <form action="createP" method="post">
 
@@ -18,11 +19,15 @@
 
     BOSS_ID: <input type="number" name="bossId"/>
 
-    EXP: <input type="number" name="exp"/>
+    COMMISSION: <input type="number" name="com"/>
 
     SALARY: <input type="number" name="salary"/>
 
     JOB_ID: <input type="number" name="jobId"/>
+
+    DEPARTMENT_ID: <input type="number" name="department"/>
+
+    PATIENT_ID: <input type="number" name="patient" value="0"/>
 
     USERNAME: <input type="text" name="username"/>
 

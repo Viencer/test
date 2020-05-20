@@ -25,10 +25,12 @@ public class FindByParse {
                 String first_name = resultSet.getNString("FIRST_NAME");
                 String last_name = resultSet.getString("LAST_NAME");
                 int jobId = resultSet.getInt("JOB_ID");
-                int experience = resultSet.getInt("EXPERIENCE");
+                int commissions = resultSet.getInt("COMMISSIONS");
                 int boss_id = resultSet.getInt("BOSS_ID");
                 int salary = resultSet.getInt("SALARY");
-                personal = new Personal(id, first_name, last_name, jobId, boss_id, salary, experience);
+                int department_id = resultSet.getInt("DEPARTMENT_ID");
+                int patient_id = resultSet.getInt("PATIENT_ID");
+                personal = new Personal(id, first_name, last_name, jobId, boss_id, salary, commissions, department_id, patient_id);
             }
         } catch (SQLException e) {
             logger.error("error in getPersonalBy() method. FindByParse.class");

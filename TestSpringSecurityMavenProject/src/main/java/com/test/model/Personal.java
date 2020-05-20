@@ -9,27 +9,48 @@ public class Personal {
     private int jobId;
     private int bossID;
     private int salary;
-    private int exp;
+    private int com;
+    private int department_id;
+    private Integer patient_id;
 
     public Personal() {
     }
 
-    public Personal(int id, String firstName, String lastName, int jobId, int bossID, int salary, int exp) {
+    public Personal(int id, String firstName, String lastName, int jobId, int bossID,
+                    int salary, int com, int department_id, int patient_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobId = jobId;
         this.bossID = bossID;
         this.salary = salary;
-        this.exp = exp;
+        this.com = com;
+        this.department_id = department_id;
+        this.patient_id = patient_id;
     }
 
-    public int getExp() {
-        return exp;
+    public int getDepartment_id() {
+        return department_id;
     }
 
-    public void setExp(int exp) {
-        this.exp = exp;
+    public void setDepartment_id(int department_id) {
+        this.department_id = department_id;
+    }
+
+    public int getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(int patient_id) {
+        this.patient_id = patient_id;
+    }
+
+    public int getCom() {
+        return com;
+    }
+
+    public void setCom(int com) {
+        this.com = com;
     }
 
     public int getSalary() {
@@ -89,14 +110,16 @@ public class Personal {
                 getJobId() == personal.getJobId() &&
                 getBossID() == personal.getBossID() &&
                 getSalary() == personal.getSalary() &&
-                getExp() == personal.getExp() &&
+                getCom() == personal.getCom() &&
+                getDepartment_id() == personal.getDepartment_id() &&
+                getPatient_id() == personal.getPatient_id() &&
                 Objects.equals(getFirstName(), personal.getFirstName()) &&
                 Objects.equals(getLastName(), personal.getLastName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getJobId(), getBossID(), getSalary(), getExp());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getJobId(), getBossID(), getSalary(), getCom(), getDepartment_id(), getPatient_id());
     }
 
     @Override
@@ -108,7 +131,9 @@ public class Personal {
                 ", jobId=" + jobId +
                 ", bossID=" + bossID +
                 ", salary=" + salary +
-                ", exp=" + exp +
+                ", com=" + com +
+                ", department_id=" + department_id +
+                ", patient_id=" + patient_id +
                 '}';
     }
 }

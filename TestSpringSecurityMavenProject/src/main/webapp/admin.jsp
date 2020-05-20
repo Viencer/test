@@ -18,19 +18,23 @@
             <th>JOB_ID</th>
             <th>BOSS_ID</th>
             <th>SALARY</th>
-            <th>EXPERIENCE</th>
+            <th>COMMISSION</th>
+            <th>DEPARTMENT_ID</th>
+            <th>PATIENT_ID</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         <c:forEach items="${listPersonal}" var="personal">
             <tr>
                 <td>${personal.id}</td>
-                <td>${personal.lastName}</td>
+                <td>${personal.firstName}</td>
                 <td>${personal.lastName}</td>
                 <td>${personal.jobId}</td>
                 <td>${personal.bossID}</td>
                 <td>${personal.salary}</td>
-                <td>${personal.exp}</td>
+                <td>${personal.com}</td>
+                <td>${personal.department_id}</td>
+                <td>${personal.patient_id}</td>
                 <td><a href="update/<c:out value='${personal.id}'/>">Update</a></td>
                 <td><a href="delete/<c:out value='${personal.id}'/>">Delete</a></td>
             </tr>
