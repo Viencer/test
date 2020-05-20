@@ -28,7 +28,7 @@ public class ListOfPersonalParse {
                 String first_name = resultSet.getNString("FIRST_NAME");
                 String last_name = resultSet.getString("LAST_NAME");
                 int jobId = resultSet.getInt("JOB_ID");
-                int commissions = resultSet.getInt("COMMISSIONS");
+                int commissions = resultSet.getInt("PREMIUM");
                 int boss_id = resultSet.getInt("BOSS_ID");
                 int salary = resultSet.getInt("SALARY");
                 int department_id = resultSet.getInt("DEPARTMENT_ID");
