@@ -68,34 +68,8 @@
         </c:forEach>
     </table>
     <br>
-    <br>
-    <table class="tg" border='1' cellpadding='2' width='30%'>
-<%--        <tr>--%>
-<%--            <td>Look at my boss</td>--%>
-<%--            <c:set var="personal" value="${person}"/>--%>
-<%--            <td><a href="getBoss/<c:out value='${personal.bossID}'/>">get BOSS</a></td>--%>
-<%--        </tr>--%>
-        <tr>
-            <td>Create new patient</td>
-            <td><a href="${pageContext.request.contextPath}/createNewPatient" <security:csrfInput/>>Create</a></td>
-        </tr>
-        <tr>
-            <td>Find patient</td>
-            <td><a href="${pageContext.request.contextPath}/findPatient">Find by...</a></td>
-        </tr>
-        <tr>
-            <td>Look at medicine</td>
-            <td><a href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
-        </tr>
-        <tr>
-            <td>Look at diagnosis</td>
-            <td><a href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
-        </tr>
-        <tr>
-            <td>Look at treatments</td>
-            <td><a href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
-        </tr>
-    </table>
+    <a href="${pageContext.request.contextPath}/createNewPatient">Create</a>
+    <a href="${pageContext.request.contextPath}/findPatient">Find by...</a>
 </security:authorize>
 <security:csrfInput/>
 </body>

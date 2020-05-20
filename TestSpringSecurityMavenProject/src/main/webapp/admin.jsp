@@ -24,25 +24,25 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <c:forEach items="${listPersonal}" var="patient">
+        <c:forEach items="${listPersonal}" var="personal">
             <tr>
-                <td>${patient.id}</td>
-                <td>${patient.firstName}</td>
-                <td>${patient.lastName}</td>
-                <td>${patient.jobId}</td>
-                <td>${patient.bossID}</td>
-                <td>${patient.salary}</td>
-                <td>${patient.premium}</td>
-                <td>${patient.department_id}</td>
-                <td>${patient.patient_id}</td>
-                <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
-                <td><a href="delete/<c:out value='${patient.id}'/>">Delete</a></td>
+                <td>${personal.id}</td>
+                <td>${personal.firstName}</td>
+                <td>${personal.lastName}</td>
+                <td>${personal.jobId}</td>
+                <td>${personal.bossID}</td>
+                <td>${personal.salary}</td>
+                <td>${personal.premium}</td>
+                <td>${personal.department_id}</td>
+                <td>${personal.patient_id}</td>
+                <td><a href="update/<c:out value='${personal.id}'/>">Update</a></td>
+                <td><a href="delete/<c:out value='${personal.id}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="${pageContext.request.contextPath}/createNewPersonal">Create</a>
-    <a href="${pageContext.request.contextPath}/findP">Find by...</a>
+    <%--    <a href="${pageContext.request.contextPath}/createNewPersonal">Create</a>--%>
+    <%--    <a href="${pageContext.request.contextPath}/findP">Find by...</a>--%>
     <br>
     <br>
     <br>
@@ -75,12 +75,51 @@
         </c:forEach>
     </table>
     <br>
-    <a href="${pageContext.request.contextPath}/createNewPatient">Create</a>
     <br>
-    <a href="${pageContext.request.contextPath}/findPatient">Find by...</a>
+    <table class="tg" border='1' cellpadding='2' width='30%'>
+        <tr>
+            <td>Create new personal</td>
+            <td><a href="${pageContext.request.contextPath}/createNewPersonal">Create</a></td>
+        </tr>
+        <tr>
+            <td>Find personal</td>
+            <td><a href="${pageContext.request.contextPath}/findP">Find by...</a></td>
+        </tr>
+        <tr>
+            <td>Create new patient</td>
+            <td><a href="${pageContext.request.contextPath}/createNewPatient">Create</a></td>
+        </tr>
+        <tr>
+            <td>Find patient</td>
+            <td><a href="${pageContext.request.contextPath}/findPatient">Find by...</a></td>
+        </tr>
+        <tr>
+            <td>My cabinet</td>
+            <td><a href="${pageContext.request.contextPath}/user">My cabinet</a></td>
+        </tr>
+        <tr>
+            <td>Look at departments</td>
+            <td><a href="${pageContext.request.contextPath}/getDepartment">departments</a></td>
+        </tr>
+        <tr>
+            <td>Look at jobs</td>
+            <td><a href="${pageContext.request.contextPath}/getJobs">jobs</a></td>
+        </tr>
+        <tr>
+            <td>Look at medicine</td>
+            <td><a href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
+        </tr>
+        <tr>
+            <td>Look at diagnosis</td>
+            <td><a href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
+        </tr>
+        <tr>
+            <td>Look at treatments</td>
+            <td><a href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
+        </tr>
+    </table>
     <br>
     <br>
-    <a href="${pageContext.request.contextPath}/user">My cabinet</a>
 </security:authorize>
 <security:csrfInput/>
 </body>

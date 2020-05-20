@@ -2,7 +2,6 @@ package com.test.dbParse.personal;
 
 import com.test.model.Personal;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +12,6 @@ public class FindByParse {
 
     private static Personal personal;
 
-    @Autowired
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
-    }
 
     public static Personal getPersonalBy(ResultSet resultSet) {
         try {

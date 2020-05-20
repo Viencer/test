@@ -2,7 +2,6 @@ package com.test.dbParse.patient;
 
 import com.test.model.Patient;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,11 +11,6 @@ public class FindByParsePatient {
     private static Logger logger = Logger.getLogger(FindByParsePatient.class);
 
     private static Patient patient;
-
-    @Autowired
-    public void setPersonal(Patient patient) {
-        this.patient = patient;
-    }
 
     public static Patient getPatientBy(ResultSet resultSet) {
         try {

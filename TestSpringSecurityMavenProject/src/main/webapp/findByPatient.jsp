@@ -41,19 +41,19 @@
         </sec:authorize/>
 
     </tr>
-    <c:forEach items="${listPatient}" var="patient">
+    <c:forEach items="${listPatient}" var="personal">
         <tr>
-            <td>${patient.id}</td>
-            <td>${patient.firstName}</td>
-            <td>${patient.lastName}</td>
-            <td>${patient.position}</td>
-            <td>${patient.phone}</td>
-            <td>${patient.address}</td>
-            <td>${patient.diagnosisId}</td>
-            <td>${patient.medicineId}</td>
-            <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
+            <td>${personal.id}</td>
+            <td>${personal.firstName}</td>
+            <td>${personal.lastName}</td>
+            <td>${personal.position}</td>
+            <td>${personal.phone}</td>
+            <td>${personal.address}</td>
+            <td>${personal.diagnosisId}</td>
+            <td>${personal.medicineId}</td>
+            <td><a href="update/<c:out value='${personal.id}'/>">Update</a></td>
             <sec:authorize access="hasRole('ADMIN')">
-                <td><a href="delete/<c:out value='${patient.id}'/>">Delete</a></td>
+                <td><a href="delete/<c:out value='${personal.id}'/>">Delete</a></td>
             </sec:authorize/>
         </tr>
     </c:forEach>

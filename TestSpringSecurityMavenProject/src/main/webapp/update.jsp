@@ -18,25 +18,25 @@
         <form action="${pageContext.request.contextPath}/updateP" method="post">
 
 <pre>
-    <c:set var="patient" value="${Personal}"/>
+    <c:set var="personal" value="${Personal}"/>
     <br>
-    <h1>Update personal with id ${patient.id}</h1>
+    <h1>Update personal with id ${personal.id}</h1>
 
-    <input type="hidden" name="id" value="${patient.id} "/>
+    <input type="hidden" name="id" value="${personal.id} "/>
 
-    <br> LAST_NAME <input type="text" name="lastName" value="${patient.lastName}"/>
+    <br> LAST_NAME <input type="text" name="lastName" value="${personal.lastName}"/>
 
-    BOSS_ID <input type="number" name="bossId" value="${patient.bossID}"/>
+    BOSS_ID <input type="number" name="bossId" value="${personal.bossID}"/>
 
-    PREMIUM <input type="number" name="com" value="${patient.premium}"/>
+    PREMIUM <input type="number" name="com" value="${personal.premium}"/>
 
-    SALARY <input type="number" name="salary" value="${patient.salary}"/>
+    SALARY <input type="number" name="salary" value="${personal.salary}"/>
 
-    JOB_ID <input type="number" name="jobId" value="${patient.jobId}"/>
+    JOB_ID <input type="number" name="jobId" value="${personal.jobId}"/>
 
-    DEPARTMENT_ID: <input type="number" name="department" value="${patient.department_id}"/>
+    DEPARTMENT_ID: <input type="number" name="department" value="${personal.department_id}"/>
 
-    PATIENT_ID: <input type="number" name="patient" value="${patient.patient_id}"/>
+    PATIENT_ID: <input type="number" name="patient" value="${personal.patient_id}"/>
 
     <input type="submit" value="update"/>
 </pre>
@@ -55,23 +55,23 @@
 <pre>
     <c:set var="patient" value="${Patient}"/>
     <br>
-    <h1>Update personal with id ${patient.id}</h1>
+    <h1>Update personal with id ${personal.id}</h1>
 
-    <input type="hidden" name="id" value="${patient.id} "/>
+    <input type="hidden" name="id" value="${personal.id} "/>
 
-    <br> FIRST_NAME___ <c:out value="${patient.firstName}"/>
+    <br> FIRST_NAME___ <c:out value="${personal.firstName}"/>
 
-    <br> LAST_NAME___ <c:out value="${patient.lastName}"/>
+    <br> LAST_NAME___ <c:out value="${personal.lastName}"/>
 
-    <br> POSITION___ <c:out value="${patient.position}"/>
+    <br> POSITION___ <c:out value="${personal.position}"/>
 
-    <br> PHONE___ <c:out value="${patient.phone}"/>
+    <br> PHONE___ <c:out value="${personal.phone}"/>
 
-    <br> ADDRESS___ <c:out value="${patient.address}"/>
+    <br> ADDRESS___ <c:out value="${personal.address}"/>
 
-    DIAGNOSIS_ID: <input type="number" name="diagnosisId" value="${patient.diagnosisId}"/>
+    DIAGNOSIS_ID: <input type="number" name="diagnosisId" value="${personal.diagnosisId}"/>
 
-    MEDICINE_ID: <input type="number" name="medicineId" value="${patient.medicineId}"/>
+    MEDICINE_ID: <input type="number" name="medicineId" value="${personal.medicineId}"/>
 
     <input type="submit" value="update"/>
 </pre>

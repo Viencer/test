@@ -1,5 +1,6 @@
 package com.test.controller;
 
+import com.test.model.Personal;
 import com.test.service.UserServicePatient;
 import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
@@ -40,8 +41,9 @@ public class MainController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView user(Principal principal, ModelAndView model) {
-        model.addObject("person", userServicePersonal.getByUserNamePersonal(principal.getName()));
-        model.addObject("listPatient", userServicePatient.allPatient());
+        Personal personal = userServicePersonal.getByUserNamePersonal(principal.getName());
+        model.addObject("person", personal);
+        model.addObject("listPatient", userServicePatient.getByIdPatientList(personal.getPatient_id()));
         model.setViewName("user");
         logger.debug("call user page page");
         return model;

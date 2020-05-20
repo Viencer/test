@@ -1,16 +1,16 @@
 package com.test.service;
 
 import com.test.dao.DaoConnectionImpl;
-import com.test.model.Patient;
-import com.test.model.Personal;
+import com.test.model.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServicePersonalImpl implements UserServicePersonal, UserServicePatient {
-    private static Logger logger = Logger.getLogger(UserServicePersonalImpl.class);
+public class UserServiceImpl implements UserServicePersonal, UserServicePatient, UserServiceOtherTables {
+    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+
 
     @Override
     public List<Personal> allPersonal() {
@@ -60,7 +60,7 @@ public class UserServicePersonalImpl implements UserServicePersonal, UserService
 
     @Override
     public List<Patient> findByLastNamePatient(String lastName) {
-       return DaoConnectionImpl.getInstance().findByLastNamePatient(lastName);
+        return DaoConnectionImpl.getInstance().findByLastNamePatient(lastName);
     }
 
     @Override
@@ -99,4 +99,28 @@ public class UserServicePersonalImpl implements UserServicePersonal, UserService
     }
 
 
+    @Override
+    public List<Department> getAllDepartments() {
+        return DaoConnectionImpl.getInstance().getAllDepartments();
+    }
+
+    @Override
+    public List<Diagnosis> getAllDiagnosis() {
+        return DaoConnectionImpl.getInstance().getAllDiagnosis();
+    }
+
+    @Override
+    public List<Jobs> getAllJobs() {
+        return DaoConnectionImpl.getInstance().getAllJobs();
+    }
+
+    @Override
+    public List<Medicine> getAllMedicines() {
+        return DaoConnectionImpl.getInstance().getAllMedicines();
+    }
+
+    @Override
+    public List<Treatment> getAllTreatments() {
+        return DaoConnectionImpl.getInstance().getAllTreatments();
+    }
 }

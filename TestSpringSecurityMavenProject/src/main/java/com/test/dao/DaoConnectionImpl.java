@@ -1,11 +1,12 @@
 package com.test.dao;
 
+import com.test.dbParse.otherTables.OtherTablesParse;
 import com.test.dbParse.patient.FindByParsePatient;
 import com.test.dbParse.patient.ListOfPatient;
 import com.test.dbParse.personal.FindByParse;
 import com.test.dbParse.personal.ListOfPersonalParse;
-import com.test.model.Patient;
-import com.test.model.Personal;
+import com.test.model.*;
+import com.test.service.UserServiceOtherTables;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +33,7 @@ import java.util.List;
 
 @Component("dao")
 @Scope(value = "singleton")
-public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
+public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange, UserServiceOtherTables {
 
     private static Logger logger = Logger.getLogger(DaoConnectionImpl.class);
 
@@ -46,6 +47,11 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     private PreparedStatement statement;
     private List<Personal> personals = new ArrayList<>();
     private List<Patient> patients = new ArrayList<>();
+    private List<Medicine> medicines = new ArrayList<>();
+    private List<Department> departments = new ArrayList<>();
+    private List<Diagnosis> diagnoses = new ArrayList<>();
+    private List<Jobs> jobs = new ArrayList<>();
+    private List<Treatment> treatments = new ArrayList<>();
 
     public static DaoConnectionImpl getInstance() {
         if (oracleDaoConnection != null) {
@@ -408,5 +414,85 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             disconnect();
         }
         return patients;
+    }
+
+    @Override
+    public List<Department> getAllDepartments() {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_DEPARTMENT");
+            resultSet = statement.executeQuery();
+            departments = OtherTablesParse.getAllDepartments(resultSet);
+            return departments;
+        } catch (SQLException e) {
+            logger.error("error in selectAllDepartments() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return departments;
+    }
+
+    @Override
+    public List<Diagnosis> getAllDiagnosis() {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_DIAGNOSIS");
+            resultSet = statement.executeQuery();
+            diagnoses = OtherTablesParse.getAllDiagnosis(resultSet);
+            return diagnoses;
+        } catch (SQLException e) {
+            logger.error("error in getAllDiagnosis() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return diagnoses;
+    }
+
+    @Override
+    public List<Jobs> getAllJobs() {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_JOBS");
+            resultSet = statement.executeQuery();
+            jobs = OtherTablesParse.getAllJobs(resultSet);
+            return jobs;
+        } catch (SQLException e) {
+            logger.error("error in getAllJobs() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return jobs;
+    }
+
+    @Override
+    public List<Medicine> getAllMedicines() {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_MEDICINE");
+            resultSet = statement.executeQuery();
+            medicines = OtherTablesParse.getAllMedicine(resultSet);
+            return medicines;
+        } catch (SQLException e) {
+            logger.error("error in getAllMedicines() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return medicines;
+    }
+
+    @Override
+    public List<Treatment> getAllTreatments() {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_TREATMENT");
+            resultSet = statement.executeQuery();
+            treatments = OtherTablesParse.getAllTreatment(resultSet);
+            return treatments;
+        } catch (SQLException e) {
+            logger.error("error in getAllTreatments() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return treatments;
     }
 }

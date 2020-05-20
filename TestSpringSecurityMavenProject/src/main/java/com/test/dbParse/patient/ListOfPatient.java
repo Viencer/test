@@ -2,7 +2,6 @@ package com.test.dbParse.patient;
 
 import com.test.model.Patient;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,10 +13,6 @@ public class ListOfPatient {
 
     private static Patient patient;
 
-    @Autowired
-    public void setPersonal(Patient patient) {
-        this.patient = patient;
-    }
 
     public static List<Patient> getAllPatient(ResultSet resultSet) {
         List<Patient> patients = new ArrayList<Patient>();
