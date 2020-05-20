@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+public class UserServicePersonalImpl implements UserServicePersonal, UserServicePatient {
+    private static Logger logger = Logger.getLogger(UserServicePersonalImpl.class);
 
     @Override
     public List<Personal> allPersonal() {
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createPersonal(String firstName, String lastName, int bossId, int com, int salary, int jobId,
-                               int department_id, Integer patient_id , String username, String password) {
+                               int department_id, Integer patient_id, String username, String password) {
         logger.debug("called create() method. UserServiceImpl.class");
         DaoConnectionImpl.getInstance().createPersonal(firstName, lastName, bossId, com, salary, jobId,
                 department_id, patient_id);
@@ -36,6 +36,37 @@ public class UserServiceImpl implements UserService {
     public void updatePersonal(int id, String lastName, int bossId, int com, int salary, int jobId, int department_id, Integer patient_id) {
         logger.debug("called update() method. UserServiceImpl.class");
         DaoConnectionImpl.getInstance().updatePersonal(id, lastName, bossId, com, salary, jobId, department_id, patient_id);
+    }
+
+    @Override
+    public void updatePatient(int id, int diagnosisId, int medicineId) {
+        DaoConnectionImpl.getInstance().updatePatient(id, diagnosisId, medicineId);
+    }
+
+    @Override
+    public Patient getByIdPatient(int id) {
+        return DaoConnectionImpl.getInstance().findByIdPatient(id);
+    }
+
+    @Override
+    public void deletePatient(int id) {
+        DaoConnectionImpl.getInstance().deletePatient(id);
+    }
+
+    @Override
+    public List<Patient> getByIdPatientList(int id) {
+        return DaoConnectionImpl.getInstance().getByIdPatientList(id);
+    }
+
+    @Override
+    public List<Patient> findByLastNamePatient(String lastName) {
+       return DaoConnectionImpl.getInstance().findByLastNamePatient(lastName);
+    }
+
+    @Override
+    public void createPatient(String firstName, String lastName, String position, int phone,
+                              String address, int diagnosisId, int medicineId) {
+        DaoConnectionImpl.getInstance().createPatient(firstName, lastName, position, phone, address, diagnosisId, medicineId);
     }
 
     @Override
@@ -53,7 +84,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Personal getByIdPersonal(int id) {
         logger.debug("called getById() method. UserServiceImpl.class");
-        return DaoConnectionImpl.getInstance().findById(id);
+        return DaoConnectionImpl.getInstance().findByIdPersonal(id);
     }
 
     @Override

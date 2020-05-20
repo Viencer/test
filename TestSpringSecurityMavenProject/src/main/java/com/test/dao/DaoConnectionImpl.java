@@ -1,5 +1,6 @@
 package com.test.dao;
 
+import com.test.dbParse.patient.FindByParsePatient;
 import com.test.dbParse.patient.ListOfPatient;
 import com.test.dbParse.personal.FindByParse;
 import com.test.dbParse.personal.ListOfPersonalParse;
@@ -33,6 +34,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     private DataSource dataSource;
     private static DaoConnectionImpl oracleDaoConnection;
     private Personal personal;
+    private Patient patient;
     private Context context;
     private Connection connection;
     private ResultSet resultSet;
@@ -150,10 +152,41 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     }
 
     @Override
+    public void updatePatient(int id, int diagnosisId, int medicineId) {
+        try {
+            connect();
+            statement = connection.prepareStatement("UPDATE LAB3MU_PATIENT" +
+                    " SET DIAGNOSIS_ID = ?, MEDICINE_ID = ? WHERE PATIENT_ID = ?");
+            statement.setInt(1, diagnosisId);
+            statement.setInt(2, medicineId);
+            statement.setInt(3, id);
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            logger.error("error in update() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+    }
+
+    @Override
     public void deletePersonal(int id) {
         try {
             connect();
             statement = connection.prepareStatement("DELETE LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            logger.error("error in delete() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+    }
+
+    @Override
+    public void deletePatient(int id) {
+        try {
+            connect();
+            statement = connection.prepareStatement("DELETE LAB3MU_PATIENT WHERE PATIENT_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
@@ -183,6 +216,28 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             } else {
                 statement.setInt(8, patient_id);
             }
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            logger.error("error in create() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+    }
+
+    @Override
+    public void createPatient(String firstName, String lastName, String position, int phone, String address, int diagnosisId, int medicineId) {
+        try {
+            connect();
+            statement = connection.prepareStatement("INSERT INTO LAB3MU_PATIENT " +
+                    "(PATIENT_ID, FIRST_NAME, LAST_NAME, POSITION, PHONE, ADDRESS, DIAGNOSIS_ID, MEDICINE_ID)  " +
+                    "VALUES (LAB3MU_PATIENT_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?)");
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, position);
+            statement.setInt(4, phone);
+            statement.setString(5, address);
+            statement.setInt(6, diagnosisId);
+            statement.setInt(7, medicineId);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             logger.error("error in create() method. DaoConnectionImpl.Class");
@@ -226,7 +281,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     }
 
     @Override
-    public Personal findById(int id) {
+    public Personal findByIdPersonal(int id) {
         try {
             connect();
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
@@ -240,6 +295,23 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             disconnect();
         }
         return personal;
+    }
+
+    @Override
+    public Patient findByIdPatient(int id) {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE PATIENT_ID = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            patient = FindByParsePatient.getPatientBy(resultSet);
+            return patient;
+        } catch (SQLException e) {
+            logger.error("error in findById() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return patient;
     }
 
     @Override
@@ -274,5 +346,39 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             disconnect();
         }
         return personals;
+    }
+
+    @Override
+    public List<Patient> getByIdPatientList(int id) {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE PATIENT_ID = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            patients = ListOfPatient.getAllPatient(resultSet);
+            return patients;
+        } catch (SQLException e) {
+            logger.error("error in findById() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return patients;
+    }
+
+    @Override
+    public List<Patient> findByLastNamePatient(String lastName) {
+        try {
+            connect();
+            statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE LAST_NAME = ?");
+            statement.setString(1, lastName);
+            resultSet = statement.executeQuery();
+            patients = ListOfPatient.getAllPatient(resultSet);
+            return patients;
+        } catch (SQLException e) {
+            logger.error("error in getByName() method. DaoConnectionImpl.Class");
+        } finally {
+            disconnect();
+        }
+        return patients;
     }
 }

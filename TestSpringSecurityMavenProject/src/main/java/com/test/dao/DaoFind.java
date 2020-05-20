@@ -12,9 +12,15 @@ public interface DaoFind {
 
     List<Personal> findByIdList(int id);
 
-    Personal findById(int id);
+    Personal findByIdPersonal(int id);
+
+    Patient findByIdPatient(int id);
 
     Personal getByName(String name);
 
     List<Personal> findByLastName(String lastName);
+
+    List<Patient> getByIdPatientList(int id);
+
+    List<Patient> findByLastNamePatient(String lastName);
 }

@@ -24,28 +24,28 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <c:forEach items="${listPersonal}" var="personal">
+        <c:forEach items="${listPersonal}" var="patient">
             <tr>
-                <td>${personal.id}</td>
-                <td>${personal.firstName}</td>
-                <td>${personal.lastName}</td>
-                <td>${personal.jobId}</td>
-                <td>${personal.bossID}</td>
-                <td>${personal.salary}</td>
-                <td>${personal.com}</td>
-                <td>${personal.department_id}</td>
-                <td>${personal.patient_id}</td>
-                <td><a href="update/<c:out value='${personal.id}'/>">Update</a></td>
-                <td><a href="delete/<c:out value='${personal.id}'/>">Delete</a></td>
+                <td>${patient.id}</td>
+                <td>${patient.firstName}</td>
+                <td>${patient.lastName}</td>
+                <td>${patient.jobId}</td>
+                <td>${patient.bossID}</td>
+                <td>${patient.salary}</td>
+                <td>${patient.com}</td>
+                <td>${patient.department_id}</td>
+                <td>${patient.patient_id}</td>
+                <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
+                <td><a href="delete/<c:out value='${patient.id}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br>
     <a href="${pageContext.request.contextPath}/create">Create</a>
     <a href="${pageContext.request.contextPath}/findP">Find by...</a>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
     <table class="tg" border='1' cellpadding='2' width='100%'>
         <tr>
             <th>ID</th>
@@ -69,11 +69,18 @@
                 <td>${patient.address}</td>
                 <td>${patient.diagnosisId}</td>
                 <td>${patient.medicineId}</td>
-                <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
-                <td><a href="delete/<c:out value='${patient.id}'/>">Delete</a></td>
+                <td><a href="updatePatient/<c:out value='${patient.id}'/>">Update</a></td>
+                <td><a href="deletePatient/<c:out value='${patient.id}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
+    <br>
+    <a href="${pageContext.request.contextPath}/createNewPatient">Create</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/findPatient">Find by...</a>
+    <br>
+    <br>
+    <a href="${pageContext.request.contextPath}/user">My cabinet</a>
 </security:authorize>
 <security:csrfInput/>
 </body>

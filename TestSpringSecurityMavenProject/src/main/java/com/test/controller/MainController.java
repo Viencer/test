@@ -1,6 +1,7 @@
 package com.test.controller;
 
-import com.test.service.UserService;
+import com.test.service.UserServicePatient;
+import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,11 +17,18 @@ public class MainController {
 
     private static Logger logger = Logger.getLogger(MainController.class);
 
-    private UserService userService;
+    private UserServicePatient userServicePatient;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserServicePatient(UserServicePatient userServicePatient) {
+        this.userServicePatient = userServicePatient;
+    }
+
+    private UserServicePersonal userServicePersonal;
+
+    @Autowired
+    public void setUserServicePersonal(UserServicePersonal userServicePersonal) {
+        this.userServicePersonal = userServicePersonal;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -29,9 +37,11 @@ public class MainController {
         return "index";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView user(Principal principal, ModelAndView model) {
-        model.addObject("person", userService.getByUserNamePersonal(principal.getName()));
+        model.addObject("person", userServicePersonal.getByUserNamePersonal(principal.getName()));
+        model.addObject("listPatient", userServicePatient.allPatient());
         model.setViewName("user");
         logger.debug("call user page page");
         return model;
@@ -40,8 +50,8 @@ public class MainController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView model) {
-        model.addObject("listPersonal", userService.allPersonal());
-        model.addObject("listPatient", userService.allPatient());
+        model.addObject("listPersonal", userServicePersonal.allPersonal());
+        model.addObject("listPatient", userServicePatient.allPatient());
         model.setViewName("admin");
         logger.debug("call admin page");
         return model;

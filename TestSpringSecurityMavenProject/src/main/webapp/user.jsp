@@ -8,7 +8,11 @@
 </head>
 <body>
 <a href="logout">logout</a> <br><br>
-<security:authorize access="hasRole('DOCTOR') or hasRole('ADMIN')">
+<security:authorize access="hasRole('ADMIN')">
+    <a href="${pageContext.request.contextPath}/admin">Admin mode</a>
+</security:authorize>
+<br><br>
+<security:authorize access="hasAnyRole('DOCTOR', 'ADMIN')">
     <table class="tg" border='1' cellpadding='2' width='100%'>
         <tr>
             <th>ID</th>
@@ -21,19 +25,52 @@
             <th>DEPARTMENT_ID</th>
             <th>PATIENT_ID</th>
         </tr>
-        <c:set var="personal" value="${person}"/>
+        <c:set var="patient" value="${person}"/>
         <tr>
-            <td>${personal.id}</td>
-            <td>${personal.firstName}</td>
-            <td>${personal.lastName}</td>
-            <td>${personal.jobId}</td>
-            <td>${personal.bossID}</td>
-            <td>${personal.salary}</td>
-            <td>${personal.com}</td>
-            <td>${personal.department_id}</td>
-            <td>${personal.patient_id}</td>
+            <td>${patient.id}</td>
+            <td>${patient.firstName}</td>
+            <td>${patient.lastName}</td>
+            <td>${patient.jobId}</td>
+            <td>${patient.bossID}</td>
+            <td>${patient.salary}</td>
+            <td>${patient.com}</td>
+            <td>${patient.department_id}</td>
+            <td>${patient.patient_id}</td>
         </tr>
     </table>
+    <br>
+    YOUR PATIENT
+    <br>
+    <table class="tg" border='1' cellpadding='2' width='100%'>
+        <tr>
+            <th>ID</th>
+            <th>FIRST_NAME</th>
+            <th>LAST_NAME</th>
+            <th>POSITION</th>
+            <th>PHONE</th>
+            <th>ADDRESS</th>
+            <th>DIAGNOSIS_ID</th>
+            <th>MEDICINE_ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <c:forEach items="${listPatient}" var="patient">
+            <tr>
+                <td>${patient.id}</td>
+                <td>${patient.firstName}</td>
+                <td>${patient.lastName}</td>
+                <td>${patient.position}</td>
+                <td>${patient.phone}</td>
+                <td>${patient.address}</td>
+                <td>${patient.diagnosisId}</td>
+                <td>${patient.medicineId}</td>
+                <td><a href="updatePatient/<c:out value='${patient.id}'/>">Update</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br>
+    <a href="${pageContext.request.contextPath}/createNewPatient">Create</a>
+    <a href="${pageContext.request.contextPath}/findPatient">Find by...</a>
 </security:authorize>
 <security:csrfInput/>
 </body>

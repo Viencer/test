@@ -1,6 +1,7 @@
 package com.test.controller;
 
-import com.test.service.UserService;
+import com.test.service.UserServicePatient;
+import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,17 +17,28 @@ public class UpdateController {
 
     private static Logger logger = Logger.getLogger(UpdateController.class);
 
-    private UserService userService;
+    private UserServicePersonal userServicePersonal;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserServicePersonal(UserServicePersonal userServicePersonal) {
+        this.userServicePersonal = userServicePersonal;
     }
 
+    private UserServicePatient userServicePatient;
+
+    @Autowired
+    public void setUserServicePatient(UserServicePatient userServicePatient) {
+        this.userServicePatient = userServicePatient;
+    }
+
+
+    //ADMIN_ROLE
+    ////UPDATE PERSONAL
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{personalId}")
     public ModelAndView findById(ModelAndView model, @PathVariable("personalId") int personalId) {
-        model.addObject("Personal", userService.getByIdPersonal(personalId));
+        model.addObject("Personal", userServicePersonal.getByIdPersonal(personalId));
+        model.addObject("task", 1);
         model.setViewName("update");
         logger.debug("called update controller with id to update: " + personalId);
         return model;
@@ -38,8 +50,30 @@ public class UpdateController {
                                @RequestParam("bossId") int bossId, @RequestParam("com") int com,
                                @RequestParam("salary") int salary, @RequestParam("jobId") int jobId,
                                @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
-        userService.updatePersonal(id, lastName, bossId, com, salary, jobId, department, patient);
+        userServicePersonal.updatePersonal(id, lastName, bossId, com, salary, jobId, department, patient);
         model.addObject("msg", "personal updated");
+        model.setViewName("update");
+        logger.debug("called update controller with param");
+        return model;
+    }
+
+    ////UPDATE PATIENT
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
+    @RequestMapping(value = "/updatePatient/{patientId}")
+    public ModelAndView findByIdPatient(ModelAndView model, @PathVariable("patientId") int personalId) {
+        model.addObject("Patient", userServicePatient.getByIdPatient(personalId));
+        model.addObject("task", 2);
+        model.setViewName("update");
+        logger.debug("called update controller with id to update: " + personalId);
+        return model;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
+    @RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
+    public ModelAndView updatePatient(ModelAndView model, @RequestParam("id") int id,
+                                      @RequestParam("diagnosisId") int diagnosisId, @RequestParam("medicineId") int medicineId) {
+        userServicePatient.updatePatient(id, diagnosisId, medicineId);
+        model.addObject("msg", "patient updated");
         model.setViewName("update");
         logger.debug("called update controller with param");
         return model;

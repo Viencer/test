@@ -1,17 +1,14 @@
 package com.test.service;
 
-import com.test.model.Patient;
 import com.test.model.Personal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface UserService {
+public interface UserServicePersonal {
 
     List<Personal> allPersonal();
-
-    List<Patient> allPatient();
 
     void createPersonal(String firstName, String lastName, int bossId, int com, int salary,
                         int jobId, int department_id, Integer patient_id, String username, String password);
