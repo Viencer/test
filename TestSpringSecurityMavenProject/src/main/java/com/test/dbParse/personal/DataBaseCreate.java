@@ -1,4 +1,4 @@
-package com.test.dbParse;
+package com.test.dbParse.personal;
 
 
 import java.sql.Connection;

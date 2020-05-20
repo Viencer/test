@@ -40,8 +40,40 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="create">Create</a>
-    <a href="findby">Find by...</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/create">Create</a>
+    <a href="${pageContext.request.contextPath}/findP">Find by...</a>
+<br>
+<br>
+<br>
+    <table class="tg" border='1' cellpadding='2' width='100%'>
+        <tr>
+            <th>ID</th>
+            <th>FIRST_NAME</th>
+            <th>LAST_NAME</th>
+            <th>POSITION</th>
+            <th>PHONE</th>
+            <th>ADDRESS</th>
+            <th>DIAGNOSIS_ID</th>
+            <th>MEDICINE_ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <c:forEach items="${listPatient}" var="patient">
+            <tr>
+                <td>${patient.id}</td>
+                <td>${patient.firstName}</td>
+                <td>${patient.lastName}</td>
+                <td>${patient.position}</td>
+                <td>${patient.phone}</td>
+                <td>${patient.address}</td>
+                <td>${patient.diagnosisId}</td>
+                <td>${patient.medicineId}</td>
+                <td><a href="update/<c:out value='${patient.id}'/>">Update</a></td>
+                <td><a href="delete/<c:out value='${patient.id}'/>">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
 </security:authorize>
 <security:csrfInput/>
 </body>

@@ -1,4 +1,4 @@
-package com.test.dbParse;
+package com.test.dbParse.personal;
 
 import com.test.model.Personal;
 import org.apache.log4j.Logger;

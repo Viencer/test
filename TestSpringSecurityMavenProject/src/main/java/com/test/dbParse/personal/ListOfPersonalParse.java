@@ -1,4 +1,4 @@
-package com.test.dbParse;
+package com.test.dbParse.personal;
 
 import com.test.model.Personal;
 import org.apache.log4j.Logger;
@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListParse {
+public class ListOfPersonalParse {
 
-    private static Logger logger = Logger.getLogger(ListParse.class);
+    private static Logger logger = Logger.getLogger(ListOfPersonalParse.class);
 
     private static Personal personal;
 
@@ -37,7 +37,7 @@ public class ListParse {
                 personals.add(personal);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllPersonal() method. ListParse.class");
+            logger.error("error in getAllPersonal() method. ListOfPersonalParse.class");
         }
         return personals;
     }

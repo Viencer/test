@@ -36,8 +36,8 @@ public class CreateController {
                                @RequestParam("salary") int salary, @RequestParam("jobId") int jobId,
                                @RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
-        userService.createPersonal(firstName, lastName, bossId, com, salary, jobId, username, password, department, patient);
-        model.addObject("msg", "personal added");
+        userService.createPersonal(firstName, lastName, bossId, com, salary, jobId, department, patient, username, password);
+        model.addObject("msg",  "personal added");
         model.setViewName("create");
         logger.debug("call create controller with param");
         return model;

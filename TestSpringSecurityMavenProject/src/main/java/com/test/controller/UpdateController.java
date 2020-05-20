@@ -40,7 +40,6 @@ public class UpdateController {
                                @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
         userService.updatePersonal(id, lastName, bossId, com, salary, jobId, department, patient);
         model.addObject("msg", "personal updated");
-        System.out.println("ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
         model.setViewName("update");
         logger.debug("called update controller with param");
         return model;

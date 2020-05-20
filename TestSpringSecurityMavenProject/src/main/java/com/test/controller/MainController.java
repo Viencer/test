@@ -1,7 +1,5 @@
 package com.test.controller;
 
-import com.test.dao.DaoConnectionImpl;
-import com.test.dbParse.DataBaseCreate;
 import com.test.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView user(Principal principal, ModelAndView model){
+    public ModelAndView user(Principal principal, ModelAndView model) {
         model.addObject("person", userService.getByUserNamePersonal(principal.getName()));
         model.setViewName("user");
         logger.debug("call user page page");
@@ -43,9 +41,9 @@ public class MainController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView model) {
         model.addObject("listPersonal", userService.allPersonal());
-        DaoConnectionImpl.getInstance().dataCreate();
+        model.addObject("listPatient", userService.allPatient());
         model.setViewName("admin");
-        logger.debug("call admin page page");
+        logger.debug("call admin page");
         return model;
     }
 

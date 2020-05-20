@@ -11,6 +11,6 @@
 </head>
 <body>
 <h1><strong>Sorry, but something went wrong</strong></h1>
-<a href="index.jsp"><h1>Back</h1></a>
+<a href="${pageContext.request.contextPath}/"><h1>Back</h1></a>
 </body>
 </html>

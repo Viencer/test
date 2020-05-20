@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -19,6 +20,9 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static Logger logger = Logger.getLogger(WebSecurityConfig.class);
+
+    @Autowired
+    private DataSource dataSource;
 
 
     @Override
@@ -41,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationMgr) {
         try {
-            authenticationMgr.jdbcAuthentication().dataSource(DaoConnectionImpl.getInstance().getDataSource())
+            authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance())
                     .usersByUsernameQuery(
                             "select USER_NAME, PASSWORD, ENABLE from LAB3MU_USER_DATA where USER_NAME = ?")
                     .authoritiesByUsernameQuery(
