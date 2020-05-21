@@ -1,20 +1,22 @@
-package com.test.dbParse.patient;
+package com.test.model.dbParse.patient;
 
 import com.test.model.Patient;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ListOfPatient {
     private static Logger logger = Logger.getLogger(ListOfPatient.class);
 
-    private static Patient patient;
+    private Patient patient;
 
 
-    public static List<Patient> getAllPatient(ResultSet resultSet) {
+    public List<Patient> getAllPatient(ResultSet resultSet) {
         List<Patient> patients = new ArrayList<Patient>();
         try {
             while (resultSet.next()) {

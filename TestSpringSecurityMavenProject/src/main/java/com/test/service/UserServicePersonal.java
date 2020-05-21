@@ -1,11 +1,10 @@
 package com.test.service;
 
 import com.test.model.Personal;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface UserServicePersonal {
 
     List<Personal> allPersonal();

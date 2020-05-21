@@ -11,11 +11,11 @@
 <a href="logout">logout</a> <br><br>
 <security:authorize access="hasRole('ADMIN')">
     <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
     <br>
     <br>
     <c:if test="${task == 1}">
-        <table class="tg" border='1' cellpadding='2' width='100%'>
+        <table class="tg" border='1' cellpadding='2' width='50%'>
             <tr>
                 <th>DEPARTMENT_id</th>
                 <th>DEPARTMENT_NAME</th>
@@ -31,7 +31,7 @@
         </table>
     </c:if>
     <c:if test="${task == 2}">
-        <table class="tg" border='1' cellpadding='2' width='100%'>
+        <table class="tg" border='1' cellpadding='2' width='50%'>
             <tr>
                 <th>JOB_ID</th>
                 <th>JOB_NAME</th>
@@ -57,7 +57,7 @@
 </security:authorize>
 <security:authorize access="hasAnyRole('DOCTOR', 'ADMIN', 'INTERN')">
     <c:if test="${task == 3}">
-        <table class="tg" border='1' cellpadding='2' width='100%'>
+        <table class="tg" border='1' cellpadding='2' width='50%'>
             <tr>
                 <th>DIAGNOSIS_ID</th>
                 <th>DAY_TO_DEATH</th>
@@ -75,7 +75,7 @@
         </table>
     </c:if>
     <c:if test="${task == 4}">
-        <table class="tg" border='1' cellpadding='2' width='100%'>
+        <table class="tg" border='1' cellpadding='2' width='50%'>
             <tr>
                 <th>MEDICINE_ID</th>
                 <th>MEDICINE_NAME</th>
@@ -93,7 +93,7 @@
         </table>
     </c:if>
     <c:if test="${task == 5}">
-        <table class="tg" border='1' cellpadding='2' width='100%'>
+        <table class="tg" border='1' cellpadding='2' width='50%'>
             <tr>
                 <th>TREATMENT_ID</th>
                 <th>NAME_OF_TREATMENT</th>

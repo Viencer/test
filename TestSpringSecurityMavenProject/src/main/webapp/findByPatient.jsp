@@ -10,7 +10,7 @@
     <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
 </sec:authorize/>
 <sec:authorize access="hasAnyRole('DOCTOR', 'ADMIN')">
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
 </sec:authorize/>
 <br>
 <br>

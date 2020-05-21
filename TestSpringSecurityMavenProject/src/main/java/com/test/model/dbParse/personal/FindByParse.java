@@ -1,19 +1,21 @@
-package com.test.dbParse.personal;
+package com.test.model.dbParse.personal;
 
 import com.test.model.Personal;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class FindByParse {
 
     private static Logger logger = Logger.getLogger(FindByParse.class);
 
-    private static Personal personal;
+    private Personal personal;
 
 
-    public static Personal getPersonalBy(ResultSet resultSet) {
+    public Personal getPersonalBy(ResultSet resultSet) {
         try {
             while (resultSet.next()) {
                 int id = resultSet.getInt("PERSONAL_ID");

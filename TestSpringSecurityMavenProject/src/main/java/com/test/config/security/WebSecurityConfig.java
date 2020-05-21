@@ -1,5 +1,6 @@
 package com.test.config.security;
 
+import com.test.dao.DaoConnection;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
-
 @EnableWebSecurity
 @ComponentScan("com.test")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -20,9 +19,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static Logger logger = Logger.getLogger(WebSecurityConfig.class);
 
-    @Autowired
-    private DataSource dataSource;
+    private DaoConnection daoConnection;
 
+    @Autowired
+    public void setDaoConnection(DaoConnection daoConnection) {
+        this.daoConnection = daoConnection;
+    }
 
     @Override
     protected void configure(HttpSecurity http) {
@@ -44,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationMgr) {
         try {
-            authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance())
+            authenticationMgr.jdbcAuthentication().dataSource(daoConnection.getDataSource()).passwordEncoder(NoOpPasswordEncoder.getInstance())
                     .usersByUsernameQuery(
                             "select USER_NAME, PASSWORD, ENABLE from LAB3MU_USER_DATA where USER_NAME = ?")
                     .authoritiesByUsernameQuery(

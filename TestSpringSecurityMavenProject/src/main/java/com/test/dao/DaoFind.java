@@ -1,11 +1,11 @@
 package com.test.dao;
 
-import com.test.model.Patient;
-import com.test.model.Personal;
+import com.test.model.*;
 
 import java.util.List;
 
 public interface DaoFind {
+
     List<Personal> selectAllPersonal();
 
     List<Patient> selectAllPatient();
@@ -23,4 +23,14 @@ public interface DaoFind {
     List<Patient> getByIdPatientList(int id);
 
     List<Patient> findByLastNamePatient(String lastName);
+
+    List<Department> getAllDepartments();
+
+    List<Diagnosis> getAllDiagnosis();
+
+    List<Jobs> getAllJobs();
+
+    List<Medicine> getAllMedicines();
+
+    List<Treatment> getAllTreatments();
 }

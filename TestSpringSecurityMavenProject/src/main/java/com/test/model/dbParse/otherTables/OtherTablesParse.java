@@ -1,24 +1,26 @@
-package com.test.dbParse.otherTables;
+package com.test.model.dbParse.otherTables;
 
 import com.test.model.*;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class OtherTablesParse {
 
     private static Logger logger = Logger.getLogger(OtherTablesParse.class);
 
-    private static Medicine medicine;
-    private static Department department;
-    private static Diagnosis diagnosis;
-    private static Jobs job;
-    private static Treatment treatment;
+    private Medicine medicine;
+    private Department department;
+    private Diagnosis diagnosis;
+    private Jobs job;
+    private Treatment treatment;
 
-    public static List<Department> getAllDepartments(ResultSet resultSet) {
+    public List<Department> getAllDepartments(ResultSet resultSet) {
         List<Department> departments = new ArrayList<Department>();
         try {
             while (resultSet.next()) {
@@ -34,7 +36,7 @@ public class OtherTablesParse {
         return departments;
     }
 
-    public static List<Diagnosis> getAllDiagnosis(ResultSet resultSet) {
+    public List<Diagnosis> getAllDiagnosis(ResultSet resultSet) {
         List<Diagnosis> diagnoses = new ArrayList<Diagnosis>();
         try {
             while (resultSet.next()) {
@@ -51,7 +53,7 @@ public class OtherTablesParse {
         return diagnoses;
     }
 
-    public static List<Jobs> getAllJobs(ResultSet resultSet) {
+    public List<Jobs> getAllJobs(ResultSet resultSet) {
         List<Jobs> jobs = new ArrayList<Jobs>();
         try {
             while (resultSet.next()) {
@@ -68,7 +70,7 @@ public class OtherTablesParse {
         return jobs;
     }
 
-    public static List<Treatment> getAllTreatment(ResultSet resultSet) {
+    public List<Treatment> getAllTreatment(ResultSet resultSet) {
         List<Treatment> treatments = new ArrayList<Treatment>();
         try {
             while (resultSet.next()) {
@@ -84,7 +86,7 @@ public class OtherTablesParse {
         return treatments;
     }
 
-    public static List<Medicine> getAllMedicine(ResultSet resultSet) {
+    public List<Medicine> getAllMedicine(ResultSet resultSet) {
         List<Medicine> medicines = new ArrayList<Medicine>();
         try {
             while (resultSet.next()) {

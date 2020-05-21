@@ -7,7 +7,7 @@
 <body>
 
 <sec:authorize access="hasRole('DOCTOR')">
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
     <c:if test="${msg != null}">
         <h1>${msg}</h1>
         <c:redirect url="/user"/>
@@ -16,7 +16,7 @@
 
 <sec:authorize access="hasRole('ADMIN')">
     <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
     <c:if test="${msg != null}">
         <h1>${msg}</h1>
         <c:redirect url="/admin"/>
@@ -76,7 +76,7 @@
 
     MEDICINE_ID: <input type="number" name="medicineId" required placeholder="medicineId"/>
 
-    <input type="submit" value="update"/>
+    <input type="submit" value="create"/>
 </pre>
         <sec:csrfInput/>
     </form>

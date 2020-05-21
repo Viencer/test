@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: olbe0615
-  Date: 05.04.2020
-  Time: 18:27
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,6 +6,27 @@
 <body>
 Welcome to Main page <br> <br>
 Login as:
-<a href="admin">Admin</a> <a href="user">User</a>
+<br>
+<a href="${pageContext.request.contextPath}/admin">Admin</a>
+<br>
+<a href="${pageContext.request.contextPath}/user">User</a>
+<br>
+<a href="${pageContext.request.contextPath}/intern">intern</a>
+<br>
+<br>
+login as admin:<br><br>
+login: admin<br><br>
+password: admin<br><br>
+//////<br><br>
+login as user:<br><br>
+login: tod<br><br>
+password: user<br><br>
+/<br><br>
+login: phil<br><br>
+password: user<br><br>
+//////
+login as intern:<br><br>
+login: bobby<br><br>
+password: user
 </body>
 </html>

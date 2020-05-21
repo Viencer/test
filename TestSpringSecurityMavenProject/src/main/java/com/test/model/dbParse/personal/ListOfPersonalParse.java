@@ -1,21 +1,23 @@
-package com.test.dbParse.personal;
+package com.test.model.dbParse.personal;
 
 import com.test.model.Personal;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ListOfPersonalParse {
 
     private static Logger logger = Logger.getLogger(ListOfPersonalParse.class);
 
-    private static Personal personal;
+    private Personal personal;
 
 
-    public static List<Personal> getAllPersonal(ResultSet resultSet) {
+    public List<Personal> getAllPersonal(ResultSet resultSet) {
         List<Personal> personals = new ArrayList<Personal>();
         try {
             while (resultSet.next()) {

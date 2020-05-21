@@ -6,7 +6,7 @@
 </head>
 <body>
 <sec:authorize access="hasRole('DOCTOR')">
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO USER</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
 </sec:authorize>
 <sec:authorize access="hasRole('ADMIN')">
     <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
@@ -55,23 +55,23 @@
 <pre>
     <c:set var="patient" value="${Patient}"/>
     <br>
-    <h1>Update personal with id ${personal.id}</h1>
+    <h1>Update personal with id ${patient.id}</h1>
 
-    <input type="hidden" name="id" value="${personal.id} "/>
+    <input type="hidden" name="id" value="${patient.id} "/>
 
-    <br> FIRST_NAME___ <c:out value="${personal.firstName}"/>
+    <br> FIRST_NAME: <input type="text" disabled name="firstName" value="${patient.firstName}"/>
 
-    <br> LAST_NAME___ <c:out value="${personal.lastName}"/>
+    <br> LAST_NAME:  <input type="text" disabled name="lastName" value="${patient.lastName}"/>
 
-    <br> POSITION___ <c:out value="${personal.position}"/>
+    <br> POSITION:   <input type="text" disabled name="position" value="${patient.position}"/>
 
-    <br> PHONE___ <c:out value="${personal.phone}"/>
+    <br> PHONE:      <input type="text" disabled name="phone" value="${patient.phone}"/>
 
-    <br> ADDRESS___ <c:out value="${personal.address}"/>
+    <br> ADDRESS:    <input type="text" disabled name="address" value="${patient.address}"/>
 
-    DIAGNOSIS_ID: <input type="number" name="diagnosisId" value="${personal.diagnosisId}"/>
+    DIAGNOSIS_ID:    <input type="number" name="diagnosisId" value="${patient.diagnosisId}"/>
 
-    MEDICINE_ID: <input type="number" name="medicineId" value="${personal.medicineId}"/>
+    MEDICINE_ID:     <input type="number" name="medicineId" value="${patient.medicineId}"/>
 
     <input type="submit" value="update"/>
 </pre>

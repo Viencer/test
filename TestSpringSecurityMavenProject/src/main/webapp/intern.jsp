@@ -11,8 +11,11 @@
 <security:authorize access="hasRole('ADMIN')">
     <a href="${pageContext.request.contextPath}/admin">Admin mode</a>
 </security:authorize>
+<security:authorize access="hasRole('DOCTOR')">
+    <a href="${pageContext.request.contextPath}/user">Doctor mode</a>
+</security:authorize>
 <br><br>
-<security:authorize access="hasAnyRole('DOCTOR', 'ADMIN')">
+<security:authorize access="hasAnyRole('DOCTOR', 'ADMIN', 'INTERN')">
     <table class="tg" border='1' cellpadding='2' width='100%'>
         <tr>
             <th>ID</th>
@@ -39,7 +42,7 @@
         </tr>
     </table>
     <br>
-    PATIENTS
+    Your patient
     <br>
     <table class="tg" border='1' cellpadding='2' width='100%'>
         <tr>
@@ -51,25 +54,45 @@
             <th>ADDRESS</th>
             <th>DIAGNOSIS_ID</th>
             <th>MEDICINE_ID</th>
-            <th>Edit</th>
         </tr>
-        <c:forEach items="${listPatient}" var="personal">
+        <c:forEach items="${listPatient}" var="patient">
             <tr>
-                <td>${personal.id}</td>
-                <td>${personal.firstName}</td>
-                <td>${personal.lastName}</td>
-                <td>${personal.position}</td>
-                <td>${personal.phone}</td>
-                <td>${personal.address}</td>
-                <td>${personal.diagnosisId}</td>
-                <td>${personal.medicineId}</td>
-                <td><a href="updatePatient/<c:out value='${personal.id}'/>">Update</a></td>
+                <td>${patient.id}</td>
+                <td>${patient.firstName}</td>
+                <td>${patient.lastName}</td>
+                <td>${patient.position}</td>
+                <td>${patient.phone}</td>
+                <td>${patient.address}</td>
+                <td>${patient.diagnosisId}</td>
+                <td>${patient.medicineId}</td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="${pageContext.request.contextPath}/createNewPatient">Create</a>
-    <a href="${pageContext.request.contextPath}/findPatient">Find by...</a>
+    <br>
+    <table class="tg" border='1' cellpadding='2' width='30%'>
+        <tr>
+            <td>Look at my sensei</td>
+            <c:set var="personal" value="${person}"/>
+            <form action="${pageContext.request.contextPath}/getBoss" method="post">
+                <input type="hidden" name="idB" value="${personal.bossID}">
+                <input type="hidden" name="idP" value="${personal.id}">
+                <td><input type="submit" value="find my sensei"/></td>
+                <security:csrfInput/>
+            </form>
+        <tr>
+            <td>Look at medicine</td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
+        </tr>
+        <tr>
+            <td>Look at diagnosis</td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
+        </tr>
+        <tr>
+            <td>Look at treatments</td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
+        </tr>
+    </table>
 </security:authorize>
 <security:csrfInput/>
 </body>

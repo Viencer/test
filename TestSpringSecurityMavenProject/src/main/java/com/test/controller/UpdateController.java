@@ -60,11 +60,11 @@ public class UpdateController {
     ////UPDATE PATIENT
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/updatePatient/{patientId}")
-    public ModelAndView findByIdPatient(ModelAndView model, @PathVariable("patientId") int personalId) {
-        model.addObject("Patient", userServicePatient.getByIdPatient(personalId));
+    public ModelAndView findByIdPatient(ModelAndView model, @PathVariable("patientId") int patientId) {
+        model.addObject("Patient", userServicePatient.getByIdPatient(patientId));
         model.addObject("task", 2);
         model.setViewName("update");
-        logger.debug("called update controller with id to update: " + personalId);
+        logger.debug("called update controller with id to update: " + patientId);
         return model;
     }
 
@@ -78,5 +78,4 @@ public class UpdateController {
         logger.debug("called update controller with param");
         return model;
     }
-
 }

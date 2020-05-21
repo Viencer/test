@@ -1,18 +1,20 @@
-package com.test.dbParse.patient;
+package com.test.model.dbParse.patient;
 
 import com.test.model.Patient;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class FindByParsePatient {
 
     private static Logger logger = Logger.getLogger(FindByParsePatient.class);
 
-    private static Patient patient;
+    private Patient patient;
 
-    public static Patient getPatientBy(ResultSet resultSet) {
+    public Patient getPatientBy(ResultSet resultSet) {
         try {
             while (resultSet.next()) {
                 int patient_id = resultSet.getInt("PATIENT_ID");

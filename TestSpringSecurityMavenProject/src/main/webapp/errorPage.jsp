@@ -10,7 +10,10 @@
     <a href="${pageContext.request.contextPath}/admin"><h1>Back to admin</h1></a>
 </security:authorize>
 <security:authorize access="hasRole('DOCTOR')">
-    <a href="${pageContext.request.contextPath}/user"><h1>Back to user</h1></a>
+    <a href="${pageContext.request.contextPath}/user"><h1>Back to doctor</h1></a>
+</security:authorize>
+<security:authorize access="hasRole('INTERN')">
+    <a href="${pageContext.request.contextPath}/intern"><h1>Back to intern</h1></a>
 </security:authorize>
 <a href="${pageContext.request.contextPath}/"><h1>Back to main menu</h1></a>
 </body>

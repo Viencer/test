@@ -53,16 +53,16 @@
             <th>MEDICINE_ID</th>
             <th>Edit</th>
         </tr>
-        <c:forEach items="${listPatient}" var="personal">
+        <c:forEach items="${listPatient}" var="patient">
             <tr>
-                <td>${personal.id}</td>
-                <td>${personal.firstName}</td>
-                <td>${personal.lastName}</td>
-                <td>${personal.position}</td>
-                <td>${personal.phone}</td>
-                <td>${personal.address}</td>
-                <td>${personal.diagnosisId}</td>
-                <td>${personal.medicineId}</td>
+                <td>${patient.id}</td>
+                <td>${patient.firstName}</td>
+                <td>${patient.lastName}</td>
+                <td>${patient.position}</td>
+                <td>${patient.phone}</td>
+                <td>${patient.address}</td>
+                <td>${patient.diagnosisId}</td>
+                <td>${patient.medicineId}</td>
                 <td><a href="updatePatient/<c:out value='${personal.id}'/>">Update</a></td>
             </tr>
         </c:forEach>
@@ -70,11 +70,17 @@
     <br>
     <br>
     <table class="tg" border='1' cellpadding='2' width='30%'>
-<%--        <tr>--%>
-<%--            <td>Look at my boss</td>--%>
-<%--            <c:set var="personal" value="${person}"/>--%>
-<%--            <td><a href="getBoss/<c:out value='${personal.bossID}'/>">get BOSS</a></td>--%>
-<%--        </tr>--%>
+        <tr>
+            <td>Look at my boss</td>
+            <c:set var="personal" value="${person}"/>
+            <form action="${pageContext.request.contextPath}/getBoss" method="post">
+                <input type="hidden" name="idB" value="${personal.bossID}">
+                <input type="hidden" name="idP" value="${personal.id}">
+                <td><input type="submit" value="find my boss"/></td>
+                <security:csrfInput/>
+            </form>
+
+        </tr>
         <tr>
             <td>Create new patient</td>
             <td><a href="${pageContext.request.contextPath}/createNewPatient" <security:csrfInput/>>Create</a></td>
@@ -85,15 +91,15 @@
         </tr>
         <tr>
             <td>Look at medicine</td>
-            <td><a href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
         </tr>
         <tr>
             <td>Look at diagnosis</td>
-            <td><a href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
         </tr>
         <tr>
             <td>Look at treatments</td>
-            <td><a href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
         </tr>
     </table>
 </security:authorize>

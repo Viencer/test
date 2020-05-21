@@ -41,8 +41,6 @@
         </c:forEach>
     </table>
     <br>
-    <%--    <a href="${pageContext.request.contextPath}/createNewPersonal">Create</a>--%>
-    <%--    <a href="${pageContext.request.contextPath}/findP">Find by...</a>--%>
     <br>
     <br>
     <br>
@@ -99,23 +97,23 @@
         </tr>
         <tr>
             <td>Look at departments</td>
-            <td><a href="${pageContext.request.contextPath}/getDepartment">departments</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getDepartment">departments</a></td>
         </tr>
         <tr>
             <td>Look at jobs</td>
-            <td><a href="${pageContext.request.contextPath}/getJobs">jobs</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getJobs">jobs</a></td>
         </tr>
         <tr>
             <td>Look at medicine</td>
-            <td><a href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getMedicine">medicine</a></td>
         </tr>
         <tr>
             <td>Look at diagnosis</td>
-            <td><a href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getDiagnosis">diagnosis</a></td>
         </tr>
         <tr>
             <td>Look at treatments</td>
-            <td><a href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
+            <td><a target="_blank" href="${pageContext.request.contextPath}/getTreatment">treatments</a></td>
         </tr>
     </table>
     <br>

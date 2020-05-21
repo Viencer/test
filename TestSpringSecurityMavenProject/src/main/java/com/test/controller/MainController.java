@@ -45,7 +45,7 @@ public class MainController {
         model.addObject("person", personal);
         model.addObject("listPatient", userServicePatient.getByIdPatientList(personal.getPatient_id()));
         model.setViewName("user");
-        logger.debug("call user page page");
+        logger.debug("call user page");
         return model;
     }
 
@@ -59,5 +59,14 @@ public class MainController {
         return model;
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_INTERN')")
+    @RequestMapping(value = "/intern", method = RequestMethod.GET)
+    public ModelAndView intern(Principal principal, ModelAndView model) {
+        Personal personal = userServicePersonal.getByUserNamePersonal(principal.getName());
+        model.addObject("person", personal);
+        model.addObject("listPatient", userServicePatient.getByIdPatientList(personal.getPatient_id()));
+        model.setViewName("intern");
+        logger.debug("call intern page");
+        return model;
+    }
 }
