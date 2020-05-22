@@ -22,7 +22,7 @@ public class PatientParse {
                 patient = getPatient(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getPatientBy() " + e);
+            logger.error("SQLException in getPatientBy() "+e);
         }
         return patient;
     }
@@ -34,7 +34,7 @@ public class PatientParse {
                 patients.add(getPatient(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getAllPatient() " + e);
+            logger.error("SQLException in getAllPatient()" +e);
         }
         return patients;
     }
@@ -51,7 +51,7 @@ public class PatientParse {
             int medicine_id = resultSet.getInt("MEDICINE_ID");
             patient = new Patient(patient_id, first_name, last_name, position, phone, address, diagnosis_id, medicine_id);
         } catch (SQLException e) {
-            logger.error("SQLException in getPatient() " + e);
+            logger.error("SQLException in getPersonalBy() method. FindByParse.class");
         }
         return patient;
     }

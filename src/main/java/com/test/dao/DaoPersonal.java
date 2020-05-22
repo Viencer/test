@@ -1,21 +1,29 @@
 package com.test.dao;
 
+import com.test.model.Personal;
 
-public interface DaoChange {
+import java.util.List;
+
+public interface DaoPersonal {
+
+    List<Personal> selectAllPersonal();
+
+    List<Personal> findByIdList(int id);
+
+    Personal findByIdPersonal(int id);
+
+    Personal getByName(String name);
+
+    List<Personal> findByLastName(String lastName);
+
     void updatePersonal(int id, String lastName, int bossId, int exp, int salary, int jobId,
                         int department_id, Integer patient_id);
 
-    void updatePatient(int id, int diagnosisId, int medicineId);
-
     void deletePersonal(int id);
-
-    void deletePatient(int id);
 
     void createPersonal(String firstName, String lastName, int bossId, int exp, int salary, int jobId,
                         int department_id, Integer patient_id);
 
-    void createPatient(String firstName, String lastName, String position, int phone,
-                       String address, int diagnosisId, int medicineId);
-
     void createPersonalData(String username, String password, int jobId);
+
 }
