@@ -1,11 +1,9 @@
 package com.test.dao;
 
-import com.test.model.dbParse.otherTables.OtherTablesParse;
-import com.test.model.dbParse.patient.FindByParsePatient;
-import com.test.model.dbParse.patient.ListOfPatient;
-import com.test.model.dbParse.personal.FindByParse;
-import com.test.model.dbParse.personal.ListOfPersonalParse;
 import com.test.model.*;
+import com.test.model.dbParse.otherTables.OtherTablesParse;
+import com.test.model.dbParse.patient.PatientParse;
+import com.test.model.dbParse.personal.PersonalParse;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,32 +80,18 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
         this.otherTablesParse = otherTablesParse;
     }
 
-    private FindByParsePatient findByParsePatient;
+    private PatientParse patientParse;
 
     @Autowired
-    public void setFindByParsePatient(FindByParsePatient findByParsePatient) {
-        this.findByParsePatient = findByParsePatient;
+    public void setPatientParse(PatientParse patientParse) {
+        this.patientParse = patientParse;
     }
 
-    private ListOfPatient listOfPatient;
+    private PersonalParse personalParse;
 
     @Autowired
-    public void setListOfPatient(ListOfPatient listOfPatient) {
-        this.listOfPatient = listOfPatient;
-    }
-
-    private FindByParse findByParse;
-
-    @Autowired
-    public void setFindByParse(FindByParse findByParse) {
-        this.findByParse = findByParse;
-    }
-
-    private ListOfPersonalParse listOfPersonalParse;
-
-    @Autowired
-    public void setListOfPersonalParse(ListOfPersonalParse listOfPersonalParse) {
-        this.listOfPersonalParse = listOfPersonalParse;
+    public void setPersonalParse(PersonalParse personalParse) {
+        this.personalParse = personalParse;
     }
 
     //CONNECT
@@ -188,7 +172,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             connect();
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL");
             resultSet = statement.executeQuery();
-            personals = listOfPersonalParse.getAllPersonal(resultSet);
+            personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
             logger.error("error in selectAllPersonal() method. DaoConnectionImpl.Class");
@@ -204,7 +188,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             connect();
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT");
             resultSet = statement.executeQuery();
-            patients = listOfPatient.getAllPatient(resultSet);
+            patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
             logger.error("error in selectAllPersonal() method. DaoConnectionImpl.Class");
@@ -381,7 +365,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            personals = listOfPersonalParse.getAllPersonal(resultSet);
+            personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
             logger.error("error in findById() method. DaoConnectionImpl.Class");
@@ -398,7 +382,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL WHERE PERSONAL_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            personal = findByParse.getPersonalBy(resultSet);
+            personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
             logger.error("error in findById() method. DaoConnectionImpl.Class");
@@ -415,7 +399,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE PATIENT_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            patient = findByParsePatient.getPatientBy(resultSet);
+            patient = patientParse.getPatientBy(resultSet);
             return patient;
         } catch (SQLException e) {
             logger.error("error in findById() method. DaoConnectionImpl.Class");
@@ -432,7 +416,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL P, LAB3MU_USER_DATA R WHERE P.PERSONAL_ID = R.PERSONAL_ID AND USER_NAME = ?");
             statement.setString(1, name);
             resultSet = statement.executeQuery();
-            personal = findByParse.getPersonalBy(resultSet);
+            personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
             logger.error("error in getByName() method. DaoConnectionImpl.Class");
@@ -449,7 +433,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PERSONAL WHERE LAST_NAME = ?");
             statement.setString(1, lastName);
             resultSet = statement.executeQuery();
-            personals = listOfPersonalParse.getAllPersonal(resultSet);
+            personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
             logger.error("error in getByName() method. DaoConnectionImpl.Class");
@@ -466,7 +450,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE PATIENT_ID = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            patients = listOfPatient.getAllPatient(resultSet);
+            patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
             logger.error("error in findById() method. DaoConnectionImpl.Class");
@@ -483,7 +467,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement = connection.prepareStatement("SELECT * FROM LAB3MU_PATIENT WHERE LAST_NAME = ?");
             statement.setString(1, lastName);
             resultSet = statement.executeQuery();
-            patients = listOfPatient.getAllPatient(resultSet);
+            patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
             logger.error("error in getByName() method. DaoConnectionImpl.Class");

@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authoritiesByUsernameQuery(
                             "select USER_NAME, ROLE from LAB3MU_USER_DATA where USER_NAME = ?");
 
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("error in configure. WebSecurityConfig.class " + e.getMessage());
         }
     }
