@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
@@ -33,9 +35,14 @@ public class DaoConnectionImpl implements DaoConnection {
 
     private static Logger logger = Logger.getLogger(DaoConnectionImpl.class);
 
+    private int count;
+    private ResultSet resultSet;
+    private PreparedStatement statement;
     private DataSource dataSource;
     private Context context;
     private Connection connection;
+
+
     private static String jndi;
 
     @Autowired
@@ -115,17 +122,24 @@ public class DaoConnectionImpl implements DaoConnection {
     }
 
     @PostConstruct
-    public void dataCreate() {
-        connect();
+    public void dataCreate() throws SQLException {
         try {
-            // File drop = ResourceUtils.getFile("classpath:drop.sql");
-            File create = ResourceUtils.getFile("classpath:db.sql");
-            File insert = ResourceUtils.getFile("classpath:insert.sql");
-            ScriptRunner scriptRunner = new ScriptRunner(connection);
-            scriptRunner.setStopOnError(false);
-            //scriptRunner.runScript(new BufferedReader(new FileReader(drop)));
-            scriptRunner.runScript(new BufferedReader(new FileReader(create)));
-            scriptRunner.runScript(new BufferedReader(new FileReader(insert)));
+            connect();
+            statement = connection.prepareStatement("SELECT count(1) as cnt FROM ALL_TABLES WHERE TABLE_NAME like 'LAB3MU%'");
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                count = resultSet.getInt("CNT");
+            }
+            if (count == 0) {
+                //File drop = ResourceUtils.getFile("classpath:drop.sql");
+                File create = ResourceUtils.getFile("classpath:db.sql");
+                File insert = ResourceUtils.getFile("classpath:insert.sql");
+                ScriptRunner scriptRunner = new ScriptRunner(connection);
+                scriptRunner.setStopOnError(false);
+                //scriptRunner.runScript(new BufferedReader(new FileReader(drop)));
+                scriptRunner.runScript(new BufferedReader(new FileReader(create)));
+                scriptRunner.runScript(new BufferedReader(new FileReader(insert)));
+            }
         } catch (NullPointerException | IOException e) {
             logger.error("Error in create database ");
         } finally {
