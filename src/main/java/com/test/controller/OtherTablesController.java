@@ -20,7 +20,7 @@ public class OtherTablesController {
     private UserServiceOtherTables userServiceOtherTables;
 
     @Autowired
-    public void setUserServiceOtherTables(@Qualifier("userServiceImpl") UserServiceOtherTables userServiceOtherTables) {
+    public void setUserServiceOtherTables(UserServiceOtherTables userServiceOtherTables) {
         this.userServiceOtherTables = userServiceOtherTables;
     }
 

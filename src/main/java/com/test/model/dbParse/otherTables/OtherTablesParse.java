@@ -31,7 +31,7 @@ public class OtherTablesParse {
                 departments.add(department);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllDepartment() method. OtherTablesParse.class");
+            logger.error("SQLException in getAllDepartment() " + e);
         }
         return departments;
     }
@@ -48,7 +48,7 @@ public class OtherTablesParse {
                 diagnoses.add(diagnosis);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllDiagnosis() method. OtherTablesParse.class");
+            logger.error("SQLException in getAllDiagnosis() " + e);
         }
         return diagnoses;
     }
@@ -65,7 +65,7 @@ public class OtherTablesParse {
                 jobs.add(job);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllPatient() method. OtherTablesParse.class");
+            logger.error("SQLException in getAllJobs() " + e);
         }
         return jobs;
     }
@@ -81,7 +81,7 @@ public class OtherTablesParse {
                 treatments.add(treatment);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllPatient() method. OtherTablesParse.class");
+            logger.error("SQLException in getAllTreatment() " + e);
         }
         return treatments;
     }
@@ -98,7 +98,7 @@ public class OtherTablesParse {
                 medicines.add(medicine);
             }
         } catch (SQLException e) {
-            logger.error("error in getAllMedicine() method. OtherTablesParse.class");
+            logger.error("SQLException in getAllMedicine() " + e);
         }
         return medicines;
     }

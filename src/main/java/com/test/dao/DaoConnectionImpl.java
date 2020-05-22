@@ -106,7 +106,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             connection = dataSource.getConnection();
             logger.debug("connection is ok");
         } catch (SQLException | NamingException e) {
-            logger.error("DaoConnectionImpl.Class. connection error " + e.getMessage());
+            logger.error("connect(): connection error " + e);
         }
     }
 
@@ -123,7 +123,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
                 logger.debug("connection closed");
             }
         } catch (SQLException | NamingException e) {
-            logger.error("DaoConnectionImpl.Class. disconnection error " + e.getMessage());
+            logger.error("disconnect(): disconnection error " + e);
         }
     }
 
@@ -137,7 +137,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
                 connection.close();
                 context.close();
             } catch (SQLException | NamingException e) {
-                logger.error("DaoConnectionImpl.Class. disconnection error " + e.getMessage());
+                logger.error("getDataSource() disconnection error " + e);
             }
         }
     }
@@ -161,7 +161,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
                 connection.close();
                 context.close();
             } catch (NamingException | SQLException e) {
-                logger.error("Error in create database ");
+                logger.error("Error in create database " + e);
             }
         }
     }
@@ -175,7 +175,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("error in selectAllPersonal() method. DaoConnectionImpl.Class");
+            logger.error("SQLException error in selectAllPersonal() " + e);
         } finally {
             disconnect();
         }
@@ -191,7 +191,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("error in selectAllPersonal() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in selectAllPersonal() " + e);
         } finally {
             disconnect();
         }
@@ -219,7 +219,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setInt(8, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in update() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in update() " + e);
         } finally {
             disconnect();
         }
@@ -236,7 +236,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setInt(3, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in update() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in updatePatient() " + e);
         } finally {
             disconnect();
         }
@@ -250,7 +250,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in delete() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in deletePersonal() " + e);
         } finally {
             disconnect();
         }
@@ -264,7 +264,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in delete() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in deletePatient() " + e);
         } finally {
             disconnect();
         }
@@ -300,7 +300,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             }
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in create() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in createPersonal() " + e);
         } finally {
             disconnect();
         }
@@ -322,7 +322,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setInt(7, medicineId);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in create() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in createPatient() " + e);
         } finally {
             disconnect();
         }
@@ -352,7 +352,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             statement.setString(3, role);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("error in createData() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in createPersonalData() " + e);
         } finally {
             disconnect();
         }
@@ -368,7 +368,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("error in findById() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in findByIdList() " + e);
         } finally {
             disconnect();
         }
@@ -385,7 +385,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
-            logger.error("error in findById() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in findByIdPersonal() " + e);
         } finally {
             disconnect();
         }
@@ -402,7 +402,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             patient = patientParse.getPatientBy(resultSet);
             return patient;
         } catch (SQLException e) {
-            logger.error("error in findById() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in findByIdPatient() " + e);
         } finally {
             disconnect();
         }
@@ -419,7 +419,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
-            logger.error("error in getByName() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getByName() " + e);
         } finally {
             disconnect();
         }
@@ -436,7 +436,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("error in getByName() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in findByLastName() " + e);
         } finally {
             disconnect();
         }
@@ -453,7 +453,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("error in findById() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getByIdPatientList() " + e);
         } finally {
             disconnect();
         }
@@ -470,7 +470,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("error in getByName() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in findByLastNamePatient() " + e);
         } finally {
             disconnect();
         }
@@ -486,7 +486,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             departments = otherTablesParse.getAllDepartments(resultSet);
             return departments;
         } catch (SQLException e) {
-            logger.error("error in selectAllDepartments() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getAllDepartments() " + e);
         } finally {
             disconnect();
         }
@@ -502,7 +502,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             diagnoses = otherTablesParse.getAllDiagnosis(resultSet);
             return diagnoses;
         } catch (SQLException e) {
-            logger.error("error in getAllDiagnosis() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getAllDiagnosis() " + e);
         } finally {
             disconnect();
         }
@@ -518,7 +518,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             jobs = otherTablesParse.getAllJobs(resultSet);
             return jobs;
         } catch (SQLException e) {
-            logger.error("error in getAllJobs() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getAllJobs() " + e);
         } finally {
             disconnect();
         }
@@ -534,7 +534,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             medicines = otherTablesParse.getAllMedicine(resultSet);
             return medicines;
         } catch (SQLException e) {
-            logger.error("error in getAllMedicines() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getAllMedicines() " + e);
         } finally {
             disconnect();
         }
@@ -550,7 +550,7 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
             treatments = otherTablesParse.getAllTreatment(resultSet);
             return treatments;
         } catch (SQLException e) {
-            logger.error("error in getAllTreatments() method. DaoConnectionImpl.Class");
+            logger.error("SQLException in getAllTreatments() " + e);
         } finally {
             disconnect();
         }
