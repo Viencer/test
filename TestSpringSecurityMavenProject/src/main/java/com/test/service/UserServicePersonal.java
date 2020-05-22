@@ -23,5 +23,4 @@ public interface UserServicePersonal {
     Personal getByUserNamePersonal(String name);
 
     List<Personal> findByLastName(String lastName);
-
 }

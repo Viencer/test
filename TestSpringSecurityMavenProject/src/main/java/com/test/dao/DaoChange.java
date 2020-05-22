@@ -17,5 +17,5 @@ public interface DaoChange {
     void createPatient(String firstName, String lastName, String position, int phone,
                        String address, int diagnosisId, int medicineId);
 
-    void createPersonalData(String username, String password);
+    void createPersonalData(String username, String password, int jobId);
 }

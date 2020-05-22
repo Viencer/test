@@ -345,14 +345,27 @@ public class DaoConnectionImpl implements DaoConnection, DaoFind, DaoChange {
     }
 
     @Override
-    public void createPersonalData(String username, String password) {
+    public void createPersonalData(String username, String password, int jobId) {
         try {
+            String role = null;
+            switch (jobId) {
+                case 1:
+                    role = "ROLE_ADMIN";
+                    break;
+                case 2:
+                    role = "ROLE_DOCTOR";
+                    break;
+                case 3:
+                    role = "ROLE_INTERN";
+                    break;
+            }
             connect();
             statement = connection.prepareStatement("INSERT INTO LAB3MU_USER_DATA " +
                     "(personal_id, user_name, password, role, enable) " +
-                    "VALUES (LAB3MU_USER_DATA_SEQ.nextval, ?, ?, 'ROLE_DOCTOR', 1)");
+                    "VALUES (LAB3MU_USER_DATA_SEQ.nextval, ?, ?, ?, 1)");
             statement.setString(1, username);
             statement.setString(2, password);
+            statement.setString(3, role);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             logger.error("error in createData() method. DaoConnectionImpl.Class");

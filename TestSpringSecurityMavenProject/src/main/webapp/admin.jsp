@@ -24,6 +24,8 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
+        <c:set value="${department}" var="dept"/>
+        <c:set value="${jobs}" var="job"/>
         <c:forEach items="${listPersonal}" var="personal">
             <tr>
                 <td>${personal.id}</td>

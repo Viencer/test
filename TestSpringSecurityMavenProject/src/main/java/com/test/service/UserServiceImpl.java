@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserServicePersonal, UserServicePatient,
         logger.debug("called createPersonal() method. UserServiceImpl.class");
         daoChange.createPersonal(firstName, lastName, bossId, premium, salary, jobId,
                 department_id, patient_id);
-        daoChange.createPersonalData(username, password);
+        daoChange.createPersonalData(username, password, jobId);
     }
 
     @Override

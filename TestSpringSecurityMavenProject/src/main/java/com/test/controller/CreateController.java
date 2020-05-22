@@ -1,5 +1,8 @@
 package com.test.controller;
 
+import com.test.model.Patient;
+import com.test.model.Personal;
+import com.test.service.UserServiceOtherTables;
 import com.test.service.UserServicePatient;
 import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 public class CreateController {
@@ -21,6 +26,13 @@ public class CreateController {
     @Autowired
     public void setUserServicePatient(UserServicePatient userServicePatient) {
         this.userServicePatient = userServicePatient;
+    }
+
+    private UserServiceOtherTables userServiceOtherTables;
+
+    @Autowired
+    public void setUserServiceOtherTables(UserServiceOtherTables userServiceOtherTables) {
+        this.userServiceOtherTables = userServiceOtherTables;
     }
 
 
@@ -35,13 +47,18 @@ public class CreateController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/createNewPersonal")
     public ModelAndView add(ModelAndView model) {
+        List<Personal> personals = userServicePersonal.allPersonal();
         model.setViewName("create");
         model.addObject("task", 1);
+        model.addObject("jobs", userServiceOtherTables.getAllJobs());
+        model.addObject("dept", userServiceOtherTables.getAllDepartments());
+        model.addObject("patient", userServicePatient.allPatient());
+        model.addObject("personal", personals);
         logger.debug("call create controller");
         return model;
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/createPersonal", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView model, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
                                @RequestParam("bossId") int bossId, @RequestParam("com") int premium,
@@ -49,7 +66,7 @@ public class CreateController {
                                @RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("department") int department, @RequestParam("patient") Integer patient) {
         userServicePersonal.createPersonal(firstName, lastName, bossId, premium, salary, jobId, department, patient, username, password);
-        model.addObject("msg", "personal added");
+        model.addObject("msg", "personal added" + bossId);
         model.setViewName("create");
         logger.debug("call create controller with param");
         return model;
@@ -59,8 +76,11 @@ public class CreateController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/createNewPatient")
     public ModelAndView addPatient(ModelAndView model) {
+        List<Patient> patients = userServicePatient.allPatient();
         model.setViewName("create");
         model.addObject("task", 2);
+        model.addObject("diagnos", userServiceOtherTables.getAllDiagnosis());
+        model.addObject("medicine", userServiceOtherTables.getAllMedicines());
         logger.debug("call create controller");
         return model;
     }

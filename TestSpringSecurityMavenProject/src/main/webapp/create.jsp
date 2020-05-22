@@ -15,41 +15,60 @@
 </sec:authorize>
 
 <sec:authorize access="hasRole('ADMIN')">
-    <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
-    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
-    <c:if test="${msg != null}">
-        <h1>${msg}</h1>
-        <c:redirect url="/admin"/>
-    </c:if>
-    <c:if test="${task == 1}">
-        <form action="${pageContext.request.contextPath}/createPersonal" method="post">
+<p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
+<p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
+<c:if test="${msg != null}">
+    <h1>${msg}</h1>
+    <c:redirect url="/admin"/>
+</c:if>
+<c:if test="${task == 1}">
+<form action="${pageContext.request.contextPath}/createPersonal" method="post">
 
 <pre>
-    FIRST_NAME: <input type="text" name="firstName" required placeholder="firstName"/>
+    FIRST_NAME:
+ <input type="text" name="firstName" required placeholder="firstName"/><br>
+    LAST_NAME:
+ <input type="text" name="lastName" required placeholder="lastName"/><br>
+    BOSS_ID:
+ <select required name="bossId">
+       <c:forEach items="${personal}" var="personals">
+           <option value="${personals.id}">${personals.lastName}</option>
+       </c:forEach>
+  </select><br>
+    PREMIUM:
+ <input type="se" name="com" value="0"/><br>
+    SALARY:
+ <input type="number" name="salary" required placeholder="salary"/><br>
+    JOB
+ <select required name="jobId">
+       <c:forEach items="${jobs}" var="jobs">
+           <option value="${jobs.jobId}">${jobs.jobName}</option>
+       </c:forEach>
+ </select><br>
 
-    LAST_NAME: <input type="text" name="lastName" required placeholder="lastName"/>
-
-    BOSS_ID: <input type="number" name="bossId" value="0"/>
-
-    PREMIUM: <input type="number" name="com" value="0"/>
-
-    SALARY: <input type="number" name="salary" required placeholder="salary"/>
-
-    JOB_ID: <input type="number" name="jobId" required placeholder="jobId"/>
-
-    DEPARTMENT_ID: <input type="number" name="department" required placeholder="department"/>
-
-    PATIENT_ID: <input type="number" name="patient" value="0"/>
-
-    USERNAME: <input type="text" name="username" required placeholder="username"/>
-
-    PASSWORD: <input type="text" name="password" required placeholder="password"/>
+    DEPARTMENT_ID:
+ <select required name="department">
+       <c:forEach items="${dept}" var="dep">
+           <option value="${dep.departmentId}">${dep.departmentName}</option>
+       </c:forEach>
+ </select><br>
+    PATIENT:
+ <select required name="patient">
+        <option value="0"></option>
+           <c:forEach items="${patient}" var="patients">
+               <option value="${patients.id}">${patients.lastName}</option>
+           </c:forEach>
+ </select><br>
+    USERNAME:
+ <input type="text" name="username" required placeholder="username"/><br>
+    PASSWORD:
+ <input type="text" name="password" required placeholder="password"/><br>
 
     <input type="submit" value="create"/>
 </pre>
-            <sec:csrfInput/>
-        </form>
-    </c:if>
+    <sec:csrfInput/>
+</form>
+</c:if>
 </sec:authorize>
 
 <c:if test="${task == 2}">
@@ -61,22 +80,30 @@
     <form action="createPatient" method="post">
 <pre>
     <br>
+    FIRST_NAME:
+ <input type="text" name="firstName" required placeholder="firstName"/>    <br>
+    LAST_NAME:
+ <input type="text" name="lastName" required placeholder="lastName"/>    <br>
+    POSITION:
+ <input type="text" name="position" required placeholder="position"/>    <br>
+    PHONE:
+ <input type="number" name="phone" required placeholder="phone"/>    <br>
+    ADDRESS:
+ <input type="text" name="address" required placeholder="address"/>    <br>
+    DIAGNOSIS_ID:
+ <select required name="diagnosisId">
+           <c:forEach items="${diagnos}" var="diagnosis">
+               <option value="${diagnosis.diagnosisId}">${diagnosis.diagnosisName}</option>
+           </c:forEach>
+ </select><br>
+    MEDICINE_ID:
+ <select required name="medicineId">
+           <c:forEach items="${medicine}" var="med">
+               <option value="${med.medicineId}">${med.medicineName}</option>
+           </c:forEach>
+ </select><br>
 
-    <br> FIRST_NAME: <input type="text" name="firstName" required placeholder="firstName"/>
-
-    <br> LAST_NAME: <input type="text" name="lastName" required placeholder="lastName"/>
-
-    <br> POSITION: <input type="text" name="position" required placeholder="position"/>
-
-    <br> PHONE: <input type="number" name="phone" required placeholder="phone"/>
-
-    <br> ADDRESS: <input type="text" name="address" required placeholder="address"/>
-
-    DIAGNOSIS_ID: <input type="number" name="diagnosisId" required placeholder="diagnosisId"/>
-
-    MEDICINE_ID: <input type="number" name="medicineId" required placeholder="medicineId"/>
-
-    <input type="submit" value="create"/>
+ <input type="submit" value="create"/>
 </pre>
         <sec:csrfInput/>
     </form>

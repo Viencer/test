@@ -8,6 +8,7 @@ public interface DaoFind {
 
     List<Personal> selectAllPersonal();
 
+
     List<Patient> selectAllPatient();
 
     List<Personal> findByIdList(int id);
