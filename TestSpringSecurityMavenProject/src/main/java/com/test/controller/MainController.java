@@ -1,7 +1,6 @@
 package com.test.controller;
 
 import com.test.model.Personal;
-import com.test.service.UserServiceOtherTables;
 import com.test.service.UserServicePatient;
 import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class MainController {
@@ -42,13 +38,6 @@ public class MainController {
         return "index";
     }
 
-    private UserServiceOtherTables userServiceOtherTables;
-
-    @Autowired
-    public void setUserServiceOtherTables(UserServiceOtherTables userServiceOtherTables) {
-        this.userServiceOtherTables = userServiceOtherTables;
-    }
-
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView user(Principal principal, ModelAndView model) {
@@ -65,8 +54,6 @@ public class MainController {
     public ModelAndView admin(ModelAndView model) {
         model.addObject("listPersonal", userServicePersonal.allPersonal());
         model.addObject("listPatient", userServicePatient.allPatient());
-        model.addObject("department", userServiceOtherTables.getAllDepartments());
-        model.addObject("jobs", userServiceOtherTables.getAllJobs());
         model.setViewName("admin");
         logger.debug("call admin page");
         return model;
