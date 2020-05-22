@@ -48,11 +48,12 @@ public class CreateController {
     @RequestMapping(value = "/createNewPersonal")
     public ModelAndView add(ModelAndView model) {
         List<Personal> personals = userServicePersonal.allPersonal();
+        List<Patient> patients = userServicePatient.allPatient();
         model.setViewName("create");
         model.addObject("task", 1);
         model.addObject("jobs", userServiceOtherTables.getAllJobs());
         model.addObject("dept", userServiceOtherTables.getAllDepartments());
-        model.addObject("patient", userServicePatient.allPatient());
+        model.addObject("patient", patients);
         model.addObject("personal", personals);
         logger.debug("call create controller");
         return model;
@@ -76,7 +77,6 @@ public class CreateController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/createNewPatient")
     public ModelAndView addPatient(ModelAndView model) {
-        List<Patient> patients = userServicePatient.allPatient();
         model.setViewName("create");
         model.addObject("task", 2);
         model.addObject("diagnos", userServiceOtherTables.getAllDiagnosis());

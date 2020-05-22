@@ -15,14 +15,14 @@
 </sec:authorize>
 
 <sec:authorize access="hasRole('ADMIN')">
-<p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
-<p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
-<c:if test="${msg != null}">
-    <h1>${msg}</h1>
-    <c:redirect url="/admin"/>
-</c:if>
-<c:if test="${task == 1}">
-<form action="${pageContext.request.contextPath}/createPersonal" method="post">
+    <p><strong><a href="${pageContext.request.contextPath}/admin">BACK TO ADMIN</a></strong></p>
+    <p><strong><a href="${pageContext.request.contextPath}/user">BACK TO DOCTOR</a></strong></p>
+    <c:if test="${msg != null}">
+        <h1>${msg}</h1>
+        <c:redirect url="/admin"/>
+    </c:if>
+    <c:if test="${task == 1}">
+        <form action="${pageContext.request.contextPath}/createPersonal" method="post">
 
 <pre>
     FIRST_NAME:
@@ -46,7 +46,7 @@
        </c:forEach>
  </select><br>
 
-    DEPARTMENT_ID:
+    DEPARTMENT:
  <select required name="department">
        <c:forEach items="${dept}" var="dep">
            <option value="${dep.departmentId}">${dep.departmentName}</option>
@@ -66,9 +66,9 @@
 
     <input type="submit" value="create"/>
 </pre>
-    <sec:csrfInput/>
-</form>
-</c:if>
+            <sec:csrfInput/>
+        </form>
+    </c:if>
 </sec:authorize>
 
 <c:if test="${task == 2}">
@@ -90,13 +90,13 @@
  <input type="number" name="phone" required placeholder="phone"/>    <br>
     ADDRESS:
  <input type="text" name="address" required placeholder="address"/>    <br>
-    DIAGNOSIS_ID:
+    DIAGNOSIS:
  <select required name="diagnosisId">
            <c:forEach items="${diagnos}" var="diagnosis">
                <option value="${diagnosis.diagnosisId}">${diagnosis.diagnosisName}</option>
            </c:forEach>
  </select><br>
-    MEDICINE_ID:
+    MEDICINE:
  <select required name="medicineId">
            <c:forEach items="${medicine}" var="med">
                <option value="${med.medicineId}">${med.medicineName}</option>
