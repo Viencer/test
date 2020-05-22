@@ -12,6 +12,9 @@ public class Patient {
     private int diagnosisId;
     private int medicineId;
 
+    public Patient() {
+    }
+
     public Patient(int id, String firstName, String lastName, String position, String phone, String address, int diagnosisId, int medicineId) {
         this.id = id;
         this.firstName = firstName;

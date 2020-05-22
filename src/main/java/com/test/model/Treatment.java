@@ -7,6 +7,9 @@ public class Treatment {
     private String nameOfTreatment;
     private int durationDays;
 
+    public Treatment() {
+    }
+
     public Treatment(int treatmentId, String nameOfTreatment, int durationDays) {
         this.treatmentId = treatmentId;
         this.nameOfTreatment = nameOfTreatment;

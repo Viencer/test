@@ -8,6 +8,9 @@ public class Jobs {
     private int minSal;
     private int maxSal;
 
+    public Jobs() {
+    }
+
     public Jobs(int jobId, String jobName, int minSal, int maxSal) {
         this.jobId = jobId;
         this.jobName = jobName;

@@ -8,6 +8,9 @@ public class Diagnosis {
     private String diagnosisName;
     private int treatmentId;
 
+    public Diagnosis() {
+    }
+
     public Diagnosis(int diagnosisId, int dayToDeath, String diagnosisName, int treatmentId) {
         this.diagnosisId = diagnosisId;
         this.dayToDeath = dayToDeath;

@@ -8,6 +8,9 @@ public class Medicine {
     private int admissionDays;
     private String providerName;
 
+    public Medicine() {
+    }
+
     public Medicine(int medicineId, String medicineName, int admissionDays, String providerName) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;

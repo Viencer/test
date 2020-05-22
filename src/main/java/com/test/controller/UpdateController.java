@@ -32,7 +32,6 @@ public class UpdateController {
     }
 
 
-    //ADMIN_ROLE
     ////UPDATE PERSONAL
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{personalId}")

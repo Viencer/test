@@ -22,7 +22,7 @@ public class PatientParse {
                 patient = getPatient(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getPatientBy() "+e);
+            logger.error("SQLException in getPatientBy() " + e);
         }
         return patient;
     }
@@ -34,7 +34,7 @@ public class PatientParse {
                 patients.add(getPatient(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getAllPatient()" +e);
+            logger.error("SQLException in getAllPatient()" + e);
         }
         return patients;
     }
