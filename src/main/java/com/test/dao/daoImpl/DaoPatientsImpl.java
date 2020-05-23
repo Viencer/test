@@ -49,13 +49,13 @@ public class DaoPatientsImpl implements DaoPatients {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("SQLException in selectAllPersonal() " + e);
+            logger.error("SQLException in selectAllPersonal() ", e);
         } finally {
             try {
                 resultSet.close();
                 statement.close();
             } catch (SQLException e) {
-                logger.error("error in selectAllPersonal() " + e);
+                logger.error("error in selectAllPersonal() ", e);
             }
         }
         return patients;
@@ -66,7 +66,7 @@ public class DaoPatientsImpl implements DaoPatients {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            logger.error("error in close() " + e);
+            logger.error("error in close() ", e);
         }
     }
 
@@ -79,7 +79,7 @@ public class DaoPatientsImpl implements DaoPatients {
             patient = patientParse.getPatientBy(resultSet);
             return patient;
         } catch (SQLException e) {
-            logger.error("SQLException in findByIdPatient() " + e);
+            logger.error("SQLException in findByIdPatient() ", e);
         } finally {
             close();
         }
@@ -95,7 +95,7 @@ public class DaoPatientsImpl implements DaoPatients {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("SQLException in getByIdPatientList() " + e);
+            logger.error("SQLException in getByIdPatientList() ", e);
         } finally {
             close();
         }
@@ -111,7 +111,7 @@ public class DaoPatientsImpl implements DaoPatients {
             patients = patientParse.getAllPatient(resultSet);
             return patients;
         } catch (SQLException e) {
-            logger.error("SQLException in findByLastNamePatient() " + e);
+            logger.error("SQLException in findByLastNamePatient() ", e);
         } finally {
             close();
         }
@@ -128,7 +128,7 @@ public class DaoPatientsImpl implements DaoPatients {
             statement.setInt(3, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in updatePatient() " + e);
+            logger.error("SQLException in updatePatient() ", e);
         } finally {
             close();
         }
@@ -141,7 +141,7 @@ public class DaoPatientsImpl implements DaoPatients {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in deletePatient() " + e);
+            logger.error("SQLException in deletePatient() ", e);
         } finally {
             close();
         }
@@ -162,7 +162,7 @@ public class DaoPatientsImpl implements DaoPatients {
             statement.setInt(7, medicineId);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in createPatient() " + e);
+            logger.error("SQLException in createPatient() ", e);
         } finally {
             close();
         }

@@ -49,7 +49,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            logger.error("error in close() " + e);
+            logger.error("error in close() ", e);
         }
     }
 
@@ -62,7 +62,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             departments = otherTablesParse.getAllDepartments(resultSet);
             return departments;
         } catch (SQLException e) {
-            logger.error("SQLException in getAllDepartments() " + e);
+            logger.error("SQLException in getAllDepartments() ", e);
         } finally {
             close();
         }
@@ -77,7 +77,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             diagnoses = otherTablesParse.getAllDiagnosis(resultSet);
             return diagnoses;
         } catch (SQLException e) {
-            logger.error("SQLException in getAllDiagnosis() " + e);
+            logger.error("SQLException in getAllDiagnosis() ", e);
         } finally {
             close();
         }
@@ -92,7 +92,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             jobs = otherTablesParse.getAllJobs(resultSet);
             return jobs;
         } catch (SQLException e) {
-            logger.error("SQLException in getAllJobs() " + e);
+            logger.error("SQLException in getAllJobs() ", e);
         } finally {
             close();
         }
@@ -107,7 +107,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             medicines = otherTablesParse.getAllMedicine(resultSet);
             return medicines;
         } catch (SQLException e) {
-            logger.error("SQLException in getAllMedicines() " + e);
+            logger.error("SQLException in getAllMedicines() ", e);
         } finally {
             close();
         }
@@ -122,7 +122,7 @@ public class DaoOtherTablesImpl implements DaoOtherTables {
             treatments = otherTablesParse.getAllTreatment(resultSet);
             return treatments;
         } catch (SQLException e) {
-            logger.error("SQLException in getAllTreatments() " + e);
+            logger.error("SQLException in getAllTreatments() ", e);
         } finally {
             close();
         }

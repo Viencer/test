@@ -46,7 +46,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            logger.error("error in close() " + e);
+            logger.error("error in close() ", e);
         }
     }
 
@@ -58,7 +58,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("SQLException in selectAllPersonal() " + e);
+            logger.error("SQLException in selectAllPersonal() ", e);
         } finally {
             close();
         }
@@ -74,7 +74,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("SQLException in findByIdList() " + e);
+            logger.error("SQLException in findByIdList() ", e);
         } finally {
             close();
         }
@@ -90,7 +90,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
-            logger.error("SQLException in findByIdPersonal() " + e);
+            logger.error("SQLException in findByIdPersonal() ", e);
         } finally {
             close();
         }
@@ -106,7 +106,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             personal = personalParse.getPersonalBy(resultSet);
             return personal;
         } catch (SQLException e) {
-            logger.error("SQLException in getByName() " + e);
+            logger.error("SQLException in getByName() ", e);
         } finally {
             close();
         }
@@ -122,7 +122,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             personals = personalParse.getAllPersonal(resultSet);
             return personals;
         } catch (SQLException e) {
-            logger.error("SQLException in findByLastName() " + e);
+            logger.error("SQLException in findByLastName() ", e);
         } finally {
             close();
         }
@@ -149,7 +149,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             statement.setInt(8, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in update() " + e);
+            logger.error("SQLException in update() ", e);
         } finally {
             close();
         }
@@ -162,7 +162,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in deletePersonal() " + e);
+            logger.error("SQLException in deletePersonal() ", e);
         } finally {
             close();
         }
@@ -197,7 +197,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             }
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in createPersonal() " + e);
+            logger.error("SQLException in createPersonal() ", e);
         } finally {
             close();
         }
@@ -226,7 +226,7 @@ public class DaoPersonalImpl implements DaoPersonal {
             statement.setString(3, role);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            logger.error("SQLException in createPersonalData() " + e);
+            logger.error("SQLException in createPersonalData() ", e);
         } finally {
             close();
         }

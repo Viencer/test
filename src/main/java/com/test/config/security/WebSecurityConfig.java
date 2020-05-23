@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/");
         } catch (Exception e) {
-            logger.error("error in configure. WebSecurityConfig.class " + e);
+            logger.error("error in configure. WebSecurityConfig.class ", e);
         }
     }
 
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             "select USER_NAME, ROLE from LAB3MU_USER_DATA where USER_NAME = ?");
 
         } catch (Exception e) {
-            logger.error("error in configure. WebSecurityConfig.class " + e);
+            logger.error("error in configure. WebSecurityConfig.class ", e);
         }
     }
 }

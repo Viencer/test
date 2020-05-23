@@ -45,7 +45,7 @@ public class MainController {
         model.addObject("person", personal);
         model.addObject("listPatient", userServicePatient.getByIdPatientList(personal.getPatient_id()));
         model.setViewName("user");
-        logger.debug("call user page");
+        logger.debug("call user page with name " + principal.getName());
         return model;
     }
 

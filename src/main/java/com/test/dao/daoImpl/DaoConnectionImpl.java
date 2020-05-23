@@ -96,7 +96,7 @@ public class DaoConnectionImpl implements DaoConnection {
             connection = dataSource.getConnection();
             logger.debug("connection is ok");
         } catch (SQLException | NamingException e) {
-            logger.error("connect(): connection error " + e);
+            logger.error("connect(): connection error ", e);
         }
     }
 
@@ -110,7 +110,7 @@ public class DaoConnectionImpl implements DaoConnection {
                 connection.close();
                 context.close();
             } catch (SQLException | NamingException e) {
-                logger.error("getDataSource() disconnection error " + e);
+                logger.error("getDataSource() disconnection error ", e);
             }
         }
     }
@@ -141,13 +141,13 @@ public class DaoConnectionImpl implements DaoConnection {
                 scriptRunner.runScript(new BufferedReader(new FileReader(insert)));
             }
         } catch (NullPointerException | IOException e) {
-            logger.error("Error in create database ");
+            logger.error("Error in create database ", e);
         } finally {
             try {
                 connection.close();
                 context.close();
             } catch (NamingException | SQLException e) {
-                logger.error("Error in create database " + e);
+                logger.error("Error in create database ", e);
             }
         }
     }

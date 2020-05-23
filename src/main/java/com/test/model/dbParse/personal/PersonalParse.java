@@ -23,7 +23,7 @@ public class PersonalParse {
                 personal = getPersonal(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getPersonalBy() " + e);
+            logger.error("SQLException in getPersonalBy() ", e);
         }
         return personal;
     }
@@ -35,7 +35,7 @@ public class PersonalParse {
                 personals.add(getPersonal(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("SQLException in getAllPersonal() " + e);
+            logger.error("SQLException in getAllPersonal() ", e);
         }
         return personals;
     }
@@ -53,7 +53,7 @@ public class PersonalParse {
             int patient_id = resultSet.getInt("PATIENT_ID");
             personal = new Personal(id, first_name, last_name, jobId, boss_id, salary, commissions, department_id, patient_id);
         } catch (SQLException e) {
-            logger.error("SQLException in getPersonal() " + e);
+            logger.error("SQLException in getPersonal() ", e);
         }
         return personal;
     }
