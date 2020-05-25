@@ -37,10 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .and()
-                    .exceptionHandling()
-                    .accessDeniedPage("/access");
+                    .logoutSuccessUrl("/");
         } catch (Exception e) {
             logger.error("error in configure. WebSecurityConfig.class ", e);
         }
