@@ -22,21 +22,47 @@
     <br>
     <h1>Update personal with id ${personal.id}</h1>
 
-    <input type="hidden" name="id" value="${personal.id} "/>
+    <input type="hidden" name="id" value="${personal.id} "/><br>
 
-    <br> LAST_NAME <input type="text" name="lastName" value="${personal.lastName}"/>
+    LAST_NAME
+    <input type="text" name="lastName" value="${personal.lastName}"/><br>
 
-    BOSS_ID <input type="number" name="bossId" value="${personal.bossID}"/>
+    BOSS:
+    <select required name="bossId">
+       <c:forEach items="${personals}" var="personals">
+           <c:if test="${personals.id != personal.id}">
+               <option value="${personals.id}">${personals.lastName}</option>
+           </c:if>
+       </c:forEach>
+    </select><br>
 
-    PREMIUM <input type="number" name="com" value="${personal.premium}"/>
+    PREMIUM
+    <input type="number" name="com" value="${personal.premium}"/><br>
 
-    SALARY <input type="number" name="salary" value="${personal.salary}"/>
+    SALARY
+    <input type="number" name="salary" value="${personal.salary}"/><br>
 
-    JOB_ID <input type="number" name="jobId" value="${personal.jobId}"/>
+    JOB
+    <select required name="jobId">
+       <c:forEach items="${jobs}" var="jobs">
+           <option value="${jobs.jobId}">${jobs.jobName}</option>
+       </c:forEach>
+    </select><br>
 
-    DEPARTMENT_ID: <input type="number" name="department" value="${personal.department_id}"/>
+    DEPARTMENT:
+    <select required name="department">
+       <c:forEach items="${dept}" var="dep">
+           <option value="${dep.departmentId}">${dep.departmentName}</option>
+       </c:forEach>
+    </select><br>
 
-    PATIENT_ID: <input type="number" name="patient" value="${personal.patient_id}"/>
+    PATIENT:
+    <select required name="patient">
+        <option value="0"></option>
+           <c:forEach items="${patient}" var="patients">
+               <option value="${patients.id}">${patients.lastName}</option>
+           </c:forEach>
+    </select><br>
 
     <input type="submit" value="update"/>
 </pre>
@@ -57,21 +83,34 @@
     <br>
     <h1>Update personal with id ${patient.id}</h1>
 
-    <input type="hidden" name="id" value="${patient.id} "/>
+    <input type="hidden" name="id" value="${patient.id} "/><br>
+    FIRST_NAME:
+    <input type="text" disabled name="firstName" value="${patient.firstName}"/><br>
 
-    <br> FIRST_NAME: <input type="text" disabled name="firstName" value="${patient.firstName}"/>
+    LAST_NAME:
+    <input type="text" disabled name="lastName" value="${patient.lastName}"/><br>
 
-    <br> LAST_NAME:  <input type="text" disabled name="lastName" value="${patient.lastName}"/>
+    POSITION:
+    <input type="text" disabled name="position" value="${patient.position}"/><br>
 
-    <br> POSITION:   <input type="text" disabled name="position" value="${patient.position}"/>
+    PHONE:
+    <input type="text" disabled name="phone" value="${patient.phone}"/><br>
 
-    <br> PHONE:      <input type="text" disabled name="phone" value="${patient.phone}"/>
+    ADDRESS:
+    <input type="text" disabled name="address" value="${patient.address}"/>
 
-    <br> ADDRESS:    <input type="text" disabled name="address" value="${patient.address}"/>
-
-    DIAGNOSIS_ID:    <input type="number" name="diagnosisId" value="${patient.diagnosisId}"/>
-
-    MEDICINE_ID:     <input type="number" name="medicineId" value="${patient.medicineId}"/>
+    DIAGNOSIS:
+    <select required name="diagnosisId">
+           <c:forEach items="${diagnos}" var="diagnosis">
+               <option value="${diagnosis.diagnosisId}">${diagnosis.diagnosisName}</option>
+           </c:forEach>
+    </select><br>
+    MEDICINE:
+    <select required name="medicineId">
+           <c:forEach items="${medicine}" var="med">
+               <option value="${med.medicineId}">${med.medicineName}</option>
+           </c:forEach>
+    </select><br>
 
     <input type="submit" value="update"/>
 </pre>

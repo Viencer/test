@@ -40,6 +40,7 @@ public class UserServicePersonalImpl implements UserServicePersonal {
     public void updatePersonal(int id, String lastName, int bossId, int premium, int salary, int jobId, int department_id, Integer patient_id) {
         logger.debug("called updatePersonal() method. UserServiceImpl.class");
         daoPersonal.updatePersonal(id, lastName, bossId, premium, salary, jobId, department_id, patient_id);
+        daoPersonal.updatePersonalData(id, jobId);
     }
 
 

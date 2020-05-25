@@ -29,7 +29,7 @@
  <input type="text" name="firstName" required placeholder="firstName"/><br>
     LAST_NAME:
  <input type="text" name="lastName" required placeholder="lastName"/><br>
-    BOSS_ID:
+    BOSS:
  <select required name="bossId">
        <c:forEach items="${personal}" var="personals">
            <option value="${personals.id}">${personals.lastName}</option>

@@ -26,4 +26,6 @@ public interface DaoPersonal {
 
     void createPersonalData(String username, String password, int jobId);
 
+    void updatePersonalData(int personalId, int jobId);
+
 }

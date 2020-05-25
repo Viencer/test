@@ -1,5 +1,8 @@
 package com.test.controller;
 
+import com.test.model.Patient;
+import com.test.model.Personal;
+import com.test.service.UserServiceOtherTables;
 import com.test.service.UserServicePatient;
 import com.test.service.UserServicePersonal;
 import org.apache.log4j.Logger;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class UpdateController {
@@ -31,12 +36,25 @@ public class UpdateController {
         this.userServicePatient = userServicePatient;
     }
 
+    private UserServiceOtherTables userServiceOtherTables;
+
+    @Autowired
+    public void setUserServiceOtherTables(UserServiceOtherTables userServiceOtherTables) {
+        this.userServiceOtherTables = userServiceOtherTables;
+    }
+
 
     ////UPDATE PERSONAL
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{personalId}")
     public ModelAndView findById(ModelAndView model, @PathVariable("personalId") int personalId) {
+        List<Personal> personals = userServicePersonal.allPersonal();
+        List<Patient> patients = userServicePatient.allPatient();
         model.addObject("Personal", userServicePersonal.getByIdPersonal(personalId));
+        model.addObject("jobs", userServiceOtherTables.getAllJobs());
+        model.addObject("dept", userServiceOtherTables.getAllDepartments());
+        model.addObject("patient", patients);
+        model.addObject("personals", personals);
         model.addObject("task", 1);
         model.setViewName("update");
         logger.debug("called update controller with id to update: " + personalId);
@@ -60,6 +78,8 @@ public class UpdateController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @RequestMapping(value = "/updatePatient/{patientId}")
     public ModelAndView findByIdPatient(ModelAndView model, @PathVariable("patientId") int patientId) {
+        model.addObject("diagnos", userServiceOtherTables.getAllDiagnosis());
+        model.addObject("medicine", userServiceOtherTables.getAllMedicines());
         model.addObject("Patient", userServicePatient.getByIdPatient(patientId));
         model.addObject("task", 2);
         model.setViewName("update");

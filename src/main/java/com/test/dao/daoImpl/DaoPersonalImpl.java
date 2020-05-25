@@ -40,6 +40,7 @@ public class DaoPersonalImpl implements DaoPersonal {
     private List<Personal> personals = new ArrayList<>();
     private ResultSet resultSet;
     private PreparedStatement statement;
+    private String role;
 
     private void close() {
         try {
@@ -206,29 +207,47 @@ public class DaoPersonalImpl implements DaoPersonal {
     @Override
     public void createPersonalData(String username, String password, int jobId) {
         try (Connection connection = daoConnection.getConnection()) {
-            String role = null;
-            switch (jobId) {
-                case 1:
-                    role = "ROLE_ADMIN";
-                    break;
-                case 2:
-                    role = "ROLE_DOCTOR";
-                    break;
-                case 3:
-                    role = "ROLE_INTERN";
-                    break;
-            }
             statement = connection.prepareStatement("INSERT INTO LAB3MU_USER_DATA " +
                     "(personal_id, user_name, password, role, enable) " +
                     "VALUES (LAB3MU_USER_DATA_SEQ.nextval, ?, ?, ?, 1)");
             statement.setString(1, username);
             statement.setString(2, password);
-            statement.setString(3, role);
+            statement.setString(3, setRole(jobId));
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             logger.error("SQLException in createPersonalData() ", e);
         } finally {
             close();
         }
+    }
+
+    @Override
+    public void updatePersonalData(int personalId, int jobId) {
+        try (Connection connection = daoConnection.getConnection()) {
+            statement = connection.prepareStatement("UPDATE LAB3MU_USER_DATA" +
+                    " SET ROLE = ? WHERE PERSONAL_ID = ?");
+            statement.setString(1, setRole(jobId));
+            statement.setInt(2, personalId);
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            logger.error("SQLException in update() ", e);
+        } finally {
+            close();
+        }
+    }
+
+    private String setRole(int jobId) {
+        switch (jobId) {
+            case 1:
+                role = "ROLE_ADMIN";
+                break;
+            case 2:
+                role = "ROLE_DOCTOR";
+                break;
+            case 3:
+                role = "ROLE_INTERN";
+                break;
+        }
+        return role;
     }
 }
